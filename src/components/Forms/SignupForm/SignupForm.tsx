@@ -46,6 +46,8 @@ const SignupForm: React.FC = () => {
     setEmailCheckLoading(true);
     await new Promise((r) => setTimeout(r, 500));
     setEmailCheckLoading(false);
+    // Placeholder: In a real app, check if email `value` is available
+    console.log('Checking email availability for:', value);
     return true; // Always available in this placeholder
   }
 
