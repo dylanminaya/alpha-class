@@ -1,0 +1,256 @@
+.hero {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  width: 100%;
+  padding: 4rem 2rem;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+}
+
+.hero-container {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  min-height: 500px;
+  padding: 0 2rem;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.hero-headline {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #1f2937;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.hero-subheadline {
+  font-size: 1.25rem;
+  color: #6b7280;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.hero-cta {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+  box-shadow: 0 4px 6px rgba(79, 70, 229, 0.3);
+}
+
+.hero-cta:hover {
+  background-color: #3730a3;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 12px rgba(79, 70, 229, 0.4);
+}
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.phone-mockup {
+  width: 280px;
+  height: 560px;
+  background: #1f2937;
+  border-radius: 2.5rem;
+  padding: 0.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: rotate(5deg);
+  transition: transform 0.3s ease;
+}
+
+.phone-mockup:hover {
+  transform: rotate(5deg) scale(1.05);
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 2rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.phone-header {
+  margin-bottom: 1.5rem;
+}
+
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.signal-battery {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.app-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.app-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+  text-align: center;
+}
+
+.visa-card {
+  background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  color: white;
+  margin: 0 auto;
+  width: 200px;
+  box-shadow: 0 8px 16px rgba(79, 70, 229, 0.3);
+}
+
+.card-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.visa-logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+}
+
+.card-number {
+  font-family: monospace;
+  font-size: 1rem;
+}
+
+.integration-message {
+  text-align: center;
+  margin-top: auto;
+}
+
+.integration-message p {
+  color: #6b7280;
+  margin: 0 0 1rem 0;
+  font-size: 0.95rem;
+}
+
+.tap-indicator {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.tap-circle {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #4f46e5;
+  border-radius: 50%;
+  position: relative;
+  animation: tapPulse 2s infinite;
+}
+
+.tap-circle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: #4f46e5;
+  border-radius: 50%;
+}
+
+@keyframes tapPulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem 1rem;
+    min-height: auto;
+  }
+  
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+  
+  .hero-headline {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subheadline {
+    font-size: 1.1rem;
+  }
+  
+  .hero-cta {
+    align-self: center;
+  }
+  
+  .phone-mockup {
+    width: 240px;
+    height: 480px;
+    transform: rotate(0deg);
+  }
+  
+  .phone-mockup:hover {
+    transform: rotate(0deg) scale(1.05);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-headline {
+    font-size: 2rem;
+  }
+  
+  .phone-mockup {
+    width: 200px;
+    height: 400px;
+  }
+}

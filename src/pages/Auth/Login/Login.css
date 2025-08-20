@@ -1,0 +1,17 @@
+.login-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8fafc;
+}
+
+.login-page-container {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
