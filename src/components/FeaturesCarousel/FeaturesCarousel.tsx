@@ -75,6 +75,7 @@ const FeaturesCarousel: React.FC = () => {
   const goToPrevious = () => {
     if (isTransitioning) return;
     
+    
     setIsTransitioning(true);
     setCurrentIndex((prevIndex) => 
       prevIndex === 0 ? features.length - 1 : prevIndex - 1
