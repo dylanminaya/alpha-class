@@ -1,45 +1,38 @@
 /* TrackIt Auth - SignupForm Styles */
 
+/* Page background handled in page CSS. This file styles the card and form. */
+
 .auth-card {
   width: 100%;
-  max-width: 480px;
-  background: #ffffff;
-  color: #0f172a;
-  border-radius: 12px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  padding: 24px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  color: #2d3748;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .auth-card-header {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   gap: 0.25rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
 }
 
 .auth-title {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  color: #0f172a;
-}
-
-.subtitle {
-  margin: 0;
-  color: #475569;
+  color: #2d3748;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .brand {
   font-weight: 800;
-  background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
+  background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -61,40 +54,74 @@
 
 .form-group label {
   font-size: 0.875rem;
-  color: #334155;
+  color: #4a5568;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .form-group input,
 .form-group select {
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 0.75rem 1rem;
-  background: #ffffff;
-  color: #0f172a;
+  border: 2px solid rgba(255, 107, 107, 0.2);
+  border-radius: 12px;
+  padding: 0.875rem 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  color: #2d3748;
+  font-family: 'Montserrat', sans-serif;
+  transition: all 0.3s ease;
 }
 
 .form-group input::placeholder {
-  color: #94a3b8;
+  color: #a0aec0;
 }
 
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.15);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 /* Error states */
 .form-group input[aria-invalid="true"],
 .form-group select[aria-invalid="true"] {
-  border-color: #ef4444;
-  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.12);
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 4px rgba(229, 62, 62, 0.12);
+}
+
+.password-field {
+  position: relative;
+  width: 100%;
+}
+
+.password-field input {
+  padding-right: 2.75rem; /* room for toggle */
+}
+
+.toggle-visibility {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: #ff6b6b;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-visibility:hover {
+  color: #4ecdc4;
+  transform: translateY(-50%) scale(1.1);
 }
 
 .form-row {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 0.75rem;
   width: 100%;
@@ -104,7 +131,8 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #334155;
+  color: #4a5568;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .strength {
@@ -119,22 +147,26 @@
 .btn.primary {
   width: 100%;
   box-sizing: border-box;
-  background: #3b82f6;
+  background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
   color: #ffffff;
-  border: 1px solid #3b82f6;
-  border-radius: 10px;
-  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 12px;
+  padding: 0.875rem 1rem;
   font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
 }
 
 .btn.primary:hover:not(:disabled) {
-  background: #2563eb;
-  border-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
 }
 
 .btn.primary:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+  transform: none;
 }
 
 .spinner {
@@ -153,19 +185,31 @@
 }
 
 .link {
-  color: #3b82f6;
+  color: #ff6b6b;
+  transition: all 0.3s ease;
+}
+
+.link:hover {
+  color: #4ecdc4;
+  transform: translateY(-1px);
+}
+
+.link.subtle {
+  color: #718096;
 }
 
 .form-error {
   margin: 0;
-  color: #b91c1c;
+  color: #e53e3e;
   font-size: 0.8125rem;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .form-footer {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  color: #334155;
+  color: #4a5568;
+  font-family: 'Montserrat', sans-serif;
 }
 
