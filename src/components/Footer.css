@@ -1,61 +1,91 @@
 .footer {
-  background-color: #f8fafc;
-  width: 100%;
-  padding: 2rem 2rem;
-  border-top: 1px solid #e5e7eb;
-  margin-top: 0;
+  background: linear-gradient(135deg, rgba(10, 15, 28, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
+  color: var(--dark-text);
+  padding: 3rem 2rem 2rem;
+  border-top: 1px solid rgba(52, 211, 153, 0.2);
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.03) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .footer-container {
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .footer-links {
   display: flex;
+  justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
 .footer-link {
-  color: #6b7280;
+  color: var(--dark-text-muted);
   text-decoration: none;
-  font-size: 0.9rem;
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .footer-link:hover {
-  color: #4f46e5;
+  color: var(--accent-green);
+}
+
+.footer-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--primary-green);
+  transition: width 0.3s ease;
+}
+
+.footer-link:hover::after {
+  width: 100%;
 }
 
 .footer-copyright {
   text-align: center;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(52, 211, 153, 0.1);
 }
 
 .footer-copyright p {
-  color: #9ca3af;
-  font-size: 0.875rem;
+  color: var(--dark-text-muted);
   margin: 0;
+  font-size: 0.9rem;
 }
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .footer {
-    padding: 2rem 1rem;
+    padding: 2rem 1rem 1.5rem;
   }
-  
+
   .footer-links {
     flex-direction: column;
+    align-items: center;
     gap: 1rem;
-    text-align: center;
   }
-  
-  .footer-container {
-    gap: 1.5rem;
+
+  .footer-copyright p {
+    font-size: 0.8rem;
   }
 }

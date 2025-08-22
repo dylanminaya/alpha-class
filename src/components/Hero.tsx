@@ -8,13 +8,13 @@ const Hero: React.FC = () => {
         <div className="hero-content">
           <div className="hero-text">
             <h1 className="hero-headline">
-              A capital app for independents
+              Una app de capital para independientes
             </h1>
             <p className="hero-subheadline">
-              Get paid faster and manage your finances effortlessly. Perfect for freelancers seeking a seamless financial solution.
+              Cobra más rápido y gestiona tus finanzas sin esfuerzo. Perfecta para freelancers que buscan una solución financiera integral.
             </p>
             <button className="hero-cta">
-              Join today
+              Únete hoy
             </button>
           </div>
           
@@ -31,7 +31,7 @@ const Hero: React.FC = () => {
                   </div>
                 </div>
                 <div className="app-content">
-                  <h2 className="app-title">Payments</h2>
+                  <h2 className="app-title">Pagos</h2>
                   <div className="visa-card">
                     <div className="card-info">
                       <span className="visa-logo">VISA</span>
@@ -39,7 +39,7 @@ const Hero: React.FC = () => {
                     </div>
                   </div>
                   <div className="integration-message">
-                    <p>Integrate with just one single tap</p>
+                    <p>Integra con un solo toque</p>
                     <div className="tap-indicator">
                       <div className="tap-circle"></div>
                     </div>

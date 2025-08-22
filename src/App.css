@@ -8,6 +8,19 @@
   padding: 0;
   min-height: 100vh;
   overflow-x: hidden;
+  background: #0a0f1c;
+  position: relative;
+}
+
+#root::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0a0f1c 0%, #1a2332 50%, #0f1419 100%);
+  z-index: -2;
 }
 
 body {
@@ -21,9 +34,174 @@ body {
   overflow-x: hidden;
   width: 100%;
   max-width: 100vw;
+  background: #0a0f1c;
+  color: #e2e8f0;
 }
 
 main {
   margin: 0;
   padding: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Financial Emoji Rain Effect */
+.emoji-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.emoji {
+  position: absolute;
+  font-size: 1.5rem;
+  opacity: 0.6;
+  animation: fall linear infinite;
+  user-select: none;
+}
+
+.emoji:nth-child(1) { left: 10%; animation-duration: 8s; animation-delay: 0s; }
+.emoji:nth-child(2) { left: 20%; animation-duration: 12s; animation-delay: 2s; }
+.emoji:nth-child(3) { left: 30%; animation-duration: 10s; animation-delay: 4s; }
+.emoji:nth-child(4) { left: 40%; animation-duration: 14s; animation-delay: 1s; }
+.emoji:nth-child(5) { left: 50%; animation-duration: 9s; animation-delay: 3s; }
+.emoji:nth-child(6) { left: 60%; animation-duration: 11s; animation-delay: 5s; }
+.emoji:nth-child(7) { left: 70%; animation-duration: 13s; animation-delay: 0.5s; }
+.emoji:nth-child(8) { left: 80%; animation-duration: 8.5s; animation-delay: 2.5s; }
+.emoji:nth-child(9) { left: 90%; animation-duration: 10.5s; animation-delay: 4.5s; }
+.emoji:nth-child(10) { left: 5%; animation-duration: 12.5s; animation-delay: 1.5s; }
+.emoji:nth-child(11) { left: 15%; animation-duration: 9.5s; animation-delay: 3.5s; }
+.emoji:nth-child(12) { left: 25%; animation-duration: 11.5s; animation-delay: 0.8s; }
+.emoji:nth-child(13) { left: 35%; animation-duration: 13.5s; animation-delay: 2.8s; }
+.emoji:nth-child(14) { left: 45%; animation-duration: 8.8s; animation-delay: 4.8s; }
+.emoji:nth-child(15) { left: 55%; animation-duration: 10.8s; animation-delay: 1.8s; }
+.emoji:nth-child(16) { left: 65%; animation-duration: 12.8s; animation-delay: 3.8s; }
+.emoji:nth-child(17) { left: 75%; animation-duration: 9.8s; animation-delay: 0.3s; }
+.emoji:nth-child(18) { left: 85%; animation-duration: 11.8s; animation-delay: 2.3s; }
+.emoji:nth-child(19) { left: 95%; animation-duration: 13.8s; animation-delay: 4.3s; }
+.emoji:nth-child(20) { left: 2%; animation-duration: 14.5s; animation-delay: 1.3s; }
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Green color variables for consistency */
+:root {
+  --primary-green: #10b981;
+  --primary-green-light: #34d399;
+  --primary-green-dark: #059669;
+  --accent-green: #6ee7b7;
+  --dark-bg: #0a0f1c;
+  --dark-card: #1e293b;
+  --dark-text: #e2e8f0;
+  --dark-text-muted: #94a3b8;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .emoji {
+    font-size: 1.2rem;
+  }
+
+  /* Reduce emoji count on mobile for performance */
+  .emoji:nth-child(n+11) {
+    display: none;
+  }
+}
+
+/* Tablet responsive design */
+@media (max-width: 1024px) and (min-width: 769px) {
+  body {
+    font-size: 15px;
+  }
+
+  .emoji {
+    font-size: 1.3rem;
+  }
+
+  /* Reduce emoji count on tablet */
+  .emoji:nth-child(n+16) {
+    display: none;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  body {
+    font-size: 13px;
+  }
+
+  .emoji {
+    font-size: 1rem;
+  }
+
+  /* Further reduce emoji count on small devices */
+  .emoji:nth-child(n+8) {
+    display: none;
+  }
+
+  /* Optimize animations for small devices */
+  .emoji {
+    animation-duration: 15s !important;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  body {
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .emoji-rain {
+    height: 120vh; /* Extend height for landscape */
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  button, a {
+    -webkit-tap-highlight-color: rgba(16, 185, 129, 0.2);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .emoji {
+    animation: none;
+  }
+  
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }

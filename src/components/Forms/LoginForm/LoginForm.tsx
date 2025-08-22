@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthContext';
 import './LoginForm.css';
 
 type LoginFormValues = {
@@ -18,33 +19,46 @@ const LoginForm: React.FC = () => {
     defaultValues: { rememberMe: false }
   });
   const [showPassword, setShowPassword] = useState(false);
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   async function onSubmit(values: LoginFormValues) {
     await new Promise((r) => setTimeout(r, 800));
-    // Placeholder: integrate with backend auth API
-    console.log('Login submit', values);
+    
+    try {
+      const success = await login(values.email, values.password);
+      if (success) {
+        // Redirect to dashboard for admin users, or home for regular users
+        navigate('/dashboard');
+      } else {
+        // Handle login failure - could add error state here
+        console.log('Login failed');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+    }
   }
 
   return (
     <div className="auth-card" role="region" aria-labelledby="login-title">
       <div className="auth-card-header">
-        <h1 id="login-title" className="auth-title">Welcome Back</h1>
+        <h1 id="login-title" className="auth-title">Bienvenido de Vuelta</h1>
         <div className="brand">TrackIt</div>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="auth-form">
         <div className="form-group">
-          <label htmlFor="email">Email address</label>
+          <label htmlFor="email">Dirección de correo electrónico</label>
           <input
             id="email"
             type="email"
             autoComplete="email"
             autoFocus
-            placeholder="you@example.com"
+            placeholder="tu@ejemplo.com"
             aria-invalid={errors.email ? 'true' : 'false'}
             {...register('email', {
-              required: 'Email is required',
-              pattern: { value: emailPattern, message: 'Enter a valid email' }
+              required: 'El correo electrónico es obligatorio',
+              pattern: { value: emailPattern, message: 'Ingresa un correo válido' }
             })}
           />
           {errors.email && (
@@ -53,26 +67,26 @@ const LoginForm: React.FC = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Contraseña</label>
           <div className="password-field">
             <input
               id="password"
               type={showPassword ? 'text' : 'password'}
               autoComplete="current-password"
-              placeholder="Your password"
+              placeholder="Tu contraseña"
               aria-invalid={errors.password ? 'true' : 'false'}
               {...register('password', {
-                required: 'Password is required',
-                minLength: { value: 8, message: 'At least 8 characters' }
+                required: 'La contraseña es obligatoria',
+                minLength: { value: 8, message: 'Al menos 8 caracteres' }
               })}
             />
             <button
               type="button"
               className="toggle-visibility"
-              aria-label={showPassword ? 'Hide password' : 'Show password'}
+              aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
               onClick={() => setShowPassword((s) => !s)}
             >
-              {showPassword ? 'Hide' : 'Show'}
+              {showPassword ? 'Ocultar' : 'Mostrar'}
             </button>
           </div>
           {errors.password && (
@@ -83,25 +97,25 @@ const LoginForm: React.FC = () => {
         <div className="form-row">
           <label className="checkbox">
             <input type="checkbox" {...register('rememberMe')} />
-            <span>Remember me</span>
+            <span>Recordarme</span>
           </label>
-          <Link to="#" className="link subtle">Forgot Password?</Link>
+          <Link to="#" className="link subtle">¿Olvidaste tu contraseña?</Link>
         </div>
 
         <button type="submit" className="btn primary" disabled={isSubmitting}>
           {isSubmitting ? (
             <>
               <span className="spinner" aria-hidden="true"></span>
-              <span>Signing in…</span>
+              <span>Iniciando sesión…</span>
             </>
           ) : (
-            'Sign In'
+            'Iniciar Sesión'
           )}
         </button>
 
         <div className="form-footer">
-          <span>Don't have an account?</span>
-          <Link to="/signup" className="link">Sign up</Link>
+          <span>¿No tienes una cuenta?</span>
+          <Link to="/signup" className="link">Regístrate</Link>
         </div>
       </form>
     </div>
@@ -109,5 +123,3 @@ const LoginForm: React.FC = () => {
 };
 
 export default LoginForm;
-
-

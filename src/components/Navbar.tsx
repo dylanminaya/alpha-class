@@ -27,15 +27,15 @@ const Navbar: React.FC = () => {
 
         {/* Desktop Navigation Links */}
         <div className="navbar-links">
-          <a href="#features" className="navbar-link">Features</a>
-          <a href="#pricing" className="navbar-link">Pricing</a>
-          <a href="#support" className="navbar-link">Support</a>
+          <a href="#features" className="navbar-link">Funciones</a>
+          <a href="#pricing" className="navbar-link">Precios</a>
+          <a href="#support" className="navbar-link">Soporte</a>
         </div>
 
         {/* CTA Buttons */}
         <div className="navbar-cta">
-          <Link to="/login" className="btn-login">Log In</Link>
-          <Link to="/signup" className="btn-signup">Sign Up</Link>
+          <Link to="/login" className="btn-login">Iniciar Sesión</Link>
+          <Link to="/signup" className="btn-signup">Registrarse</Link>
         </div>
 
         {/* Mobile Hamburger Menu */}
@@ -48,12 +48,12 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       <div className={`mobile-menu ${isMenuOpen ? 'active' : ''}`}>
-        <a href="#features" className="mobile-link" onClick={() => setIsMenuOpen(false)}>Features</a>
-        <a href="#pricing" className="mobile-link" onClick={() => setIsMenuOpen(false)}>Pricing</a>
-        <a href="#support" className="mobile-link" onClick={() => setIsMenuOpen(false)}>Support</a>
+        <a href="#features" className="mobile-link" onClick={() => setIsMenuOpen(false)}>Funciones</a>
+        <a href="#pricing" className="mobile-link" onClick={() => setIsMenuOpen(false)}>Precios</a>
+        <a href="#support" className="mobile-link" onClick={() => setIsMenuOpen(false)}>Soporte</a>
         <div className="mobile-cta">
-          <Link to="/login" className="btn-login mobile">Log In</Link>
-          <Link to="/signup" className="btn-signup mobile">Sign Up</Link>
+          <Link to="/login" className="btn-login mobile">Iniciar Sesión</Link>
+          <Link to="/signup" className="btn-signup mobile">Registrarse</Link>
         </div>
       </div>
     </nav>

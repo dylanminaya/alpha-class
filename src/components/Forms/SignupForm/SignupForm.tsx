@@ -8,7 +8,7 @@ type SignupFormValues = {
   email: string;
   password: string;
   confirmPassword: string;
-  workType: 'Freelancer' | 'Consultant' | 'Independent Contractor' | 'Other' | '';
+  workType: 'Freelancer' | 'Consultor' | 'Contratista Independiente' | 'Otro' | '';
   agree: boolean;
 };
 
@@ -54,92 +54,92 @@ const SignupForm: React.FC = () => {
   return (
     <div className="auth-card" role="region" aria-labelledby="signup-title">
       <div className="auth-card-header">
-        <h1 id="signup-title" className="auth-title">Join TrackIt</h1>
+        <h1 id="signup-title" className="auth-title">Únete a TrackIt</h1>
         <div className="brand">TrackIt</div>
-        <p className="subtitle">Manage your capital with clarity and ease.</p>
+        <p className="subtitle">Gestiona tu capital con claridad y facilidad.</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="auth-form">
         <div className="form-group">
-          <label htmlFor="fullName">Full name</label>
+          <label htmlFor="fullName">Nombre completo</label>
           <input
             id="fullName"
             type="text"
             autoComplete="name"
-            placeholder="Jane Doe"
+            placeholder="María García"
             aria-invalid={errors.fullName ? 'true' : 'false'}
-            {...register('fullName', { required: 'Full name is required' })}
+            {...register('fullName', { required: 'El nombre completo es obligatorio' })}
           />
           {errors.fullName && <p className="form-error" role="alert">{errors.fullName.message}</p>}
         </div>
 
         <div className="form-group">
-          <label htmlFor="email">Email address</label>
+          <label htmlFor="email">Dirección de correo electrónico</label>
           <input
             id="email"
             type="email"
             autoComplete="email"
-            placeholder="you@example.com"
+            placeholder="tu@ejemplo.com"
             aria-invalid={errors.email ? 'true' : 'false'}
             {...register('email', {
-              required: 'Email is required',
-              pattern: { value: emailPattern, message: 'Enter a valid email' },
-              validate: async (v) => (await checkEmailAvailability(v)) || 'Email already in use'
+              required: 'El correo electrónico es obligatorio',
+              pattern: { value: emailPattern, message: 'Ingresa un correo válido' },
+              validate: async (v) => (await checkEmailAvailability(v)) || 'El correo ya está en uso'
             })}
           />
-          {emailCheckLoading && <p className="hint">Checking email…</p>}
+          {emailCheckLoading && <p className="hint">Verificando correo…</p>}
           {errors.email && <p className="form-error" role="alert">{errors.email.message}</p>}
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Contraseña</label>
           <input
             id="password"
             type="password"
             autoComplete="new-password"
-            placeholder="Create a strong password"
+            placeholder="Crea una contraseña segura"
             aria-invalid={errors.password ? 'true' : 'false'}
             {...register('password', {
-              required: 'Password is required',
-              minLength: { value: 8, message: 'At least 8 characters' }
+              required: 'La contraseña es obligatoria',
+              minLength: { value: 8, message: 'Al menos 8 caracteres' }
             })}
           />
-          <div className={`strength ${strength}`}>Strength: {strength}</div>
+          <div className={`strength ${strength}`}>Seguridad: {strength === 'weak' ? 'débil' : strength === 'medium' ? 'media' : 'fuerte'}</div>
           {errors.password && <p className="form-error" role="alert">{errors.password.message}</p>}
         </div>
 
         <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm password</label>
+          <label htmlFor="confirmPassword">Confirmar contraseña</label>
           <input
             id="confirmPassword"
             type="password"
             autoComplete="new-password"
-            placeholder="Re-enter your password"
+            placeholder="Vuelve a ingresar tu contraseña"
             aria-invalid={errors.confirmPassword ? 'true' : 'false'}
             {...register('confirmPassword', {
-              required: 'Please confirm your password',
-              validate: (val) => val === password || 'Passwords do not match'
+              required: 'Por favor confirma tu contraseña',
+              validate: (val) => val === password || 'Las contraseñas no coinciden'
             })}
           />
           {errors.confirmPassword && <p className="form-error" role="alert">{errors.confirmPassword.message}</p>}
         </div>
 
         <div className="form-group">
-          <label htmlFor="workType">Work type</label>
-          <select id="workType" aria-invalid={errors.workType ? 'true' : 'false'} {...register('workType', { required: 'Select your work type' })}>
-            <option value="">Select…</option>
+          <label htmlFor="workType">Tipo de trabajo</label>
+          <select id="workType" aria-invalid={errors.workType ? 'true' : 'false'} {...register('workType', { required: 'Selecciona tu tipo de trabajo' })}>
+            <option value="">Seleccionar…</option>
             <option value="Freelancer">Freelancer</option>
-            <option value="Consultant">Consultant</option>
-            <option value="Independent Contractor">Independent Contractor</option>
-            <option value="Other">Other</option>
+            <option value="Consultor">Consultor</option>
+            <option value="Contratista Independiente">Contratista Independiente</option>
+            <option value="Otro">Otro</option>
           </select>
           {errors.workType && <p className="form-error" role="alert">{errors.workType.message}</p>}
         </div>
 
         <div className="form-row">
           <label className="checkbox">
-            <input type="checkbox" {...register('agree', { required: 'You must agree to continue' })} />
-            <span>I agree to TrackIt's <a className="link" href="#">Terms of Service</a> and <a className="link" href="#">Privacy Policy</a></span>
+            <input type="checkbox" {...register('agree', { required: 'Debes aceptar para continuar' })} />
+            <span>Acepto los <a className="link" href="#">Términos de Servicio</a> y la <a className="link" href="#">Política de Privacidad</a> de TrackIt</span>
           </label>
         </div>
         {errors.agree && <p className="form-error" role="alert">{errors.agree.message}</p>}
@@ -148,16 +148,16 @@ const SignupForm: React.FC = () => {
           {isSubmitting ? (
             <>
               <span className="spinner" aria-hidden="true"></span>
-              <span>Creating…</span>
+              <span>Creando…</span>
             </>
           ) : (
-            'Create Account'
+            'Crear Cuenta'
           )}
         </button>
 
         <div className="form-footer">
-          <span>Already have an account?</span>
-          <Link to="/login" className="link">Sign in</Link>
+          <span>¿Ya tienes una cuenta?</span>
+          <Link to="/login" className="link">Iniciar sesión</Link>
         </div>
       </form>
     </div>
@@ -165,5 +165,3 @@ const SignupForm: React.FC = () => {
 };
 
 export default SignupForm;
-
-
