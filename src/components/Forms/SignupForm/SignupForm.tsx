@@ -54,8 +54,8 @@ const SignupForm: React.FC = () => {
   return (
     <div className="auth-card" role="region" aria-labelledby="signup-title">
       <div className="auth-card-header">
-        <h1 id="signup-title" className="auth-title">Join TrackIt</h1>
-        <div className="brand">TrackIt</div>
+        <h1 id="signup-title" className="auth-title">Join Alpha Class</h1>
+        <div className="brand">Alpha Class</div>
         <p className="subtitle">Manage your capital with clarity and ease.</p>
       </div>
 
@@ -104,7 +104,7 @@ const SignupForm: React.FC = () => {
               minLength: { value: 8, message: 'At least 8 characters' }
             })}
           />
-          <div className={`strength ${strength}`}>Strength: {strength}</div>
+          {password && <div className={`strength ${strength}`}>Strength: {strength}</div>}
           {errors.password && <p className="form-error" role="alert">{errors.password.message}</p>}
         </div>
 
@@ -139,7 +139,7 @@ const SignupForm: React.FC = () => {
         <div className="form-row">
           <label className="checkbox">
             <input type="checkbox" {...register('agree', { required: 'You must agree to continue' })} />
-            <span>I agree to TrackIt's <a className="link" href="#">Terms of Service</a> and <a className="link" href="#">Privacy Policy</a></span>
+            <span>I agree to Alpha Class's <a className="link" href="#">Terms of Service</a> and <a className="link" href="#">Privacy Policy</a></span>
           </label>
         </div>
         {errors.agree && <p className="form-error" role="alert">{errors.agree.message}</p>}

@@ -4,7 +4,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f8fafc;
+  background: 
+    radial-gradient(ellipse at 30% 20%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(255, 0, 128, 0.06) 0%, transparent 50%),
+    linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+  position: relative;
+  overflow: hidden;
 }
 
 .signup-page-container {
