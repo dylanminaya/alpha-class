@@ -1,0 +1,190 @@
+.spending-graph {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+}
+
+.graph-header {
+  margin-bottom: 24px;
+}
+
+.graph-header h3 {
+  margin: 0 0 16px 0;
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.graph-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.month-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.month-filter label {
+  font-weight: 500;
+  color: #555;
+  white-space: nowrap;
+}
+
+.month-filter select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  font-size: 14px;
+  min-width: 150px;
+  cursor: pointer;
+}
+
+.month-filter select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.graph-type-toggle {
+  display: flex;
+  gap: 8px;
+}
+
+.graph-type-toggle button {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.graph-type-toggle button:hover {
+  background: #f8f9fa;
+  border-color: #007bff;
+}
+
+.graph-type-toggle button.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.total-spending {
+  text-align: right;
+  font-size: 16px;
+  color: #555;
+}
+
+.total-spending strong {
+  color: #dc3545;
+  font-size: 18px;
+}
+
+.export-controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  justify-content: flex-end;
+}
+
+.export-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.excel-btn {
+  background: #217346;
+  color: white;
+}
+
+.excel-btn:hover {
+  background: #1e6b3d;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(33, 115, 70, 0.3);
+}
+
+.csv-btn {
+  background: #6c757d;
+  color: white;
+}
+
+.csv-btn:hover {
+  background: #5a6268;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(108, 117, 125, 0.3);
+}
+
+.chart-container {
+  position: relative;
+  height: 400px;
+  margin-top: 16px;
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-style: italic;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .spending-graph {
+    padding: 16px;
+  }
+  
+  .graph-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .month-filter {
+    justify-content: space-between;
+  }
+  
+  .graph-type-toggle {
+    justify-content: center;
+  }
+  
+  .total-spending {
+    text-align: center;
+  }
+  
+  .export-controls {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .chart-container {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .graph-header h3 {
+    font-size: 1.25rem;
+  }
+  
+  .chart-container {
+    height: 250px;
+  }
+}

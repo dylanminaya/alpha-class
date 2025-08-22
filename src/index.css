@@ -3,9 +3,46 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Vivid but formal color palette */
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-light: #3b82f6;
+  --primary-dark: #1e40af;
+  
+  --secondary-color: #7c3aed;
+  --secondary-hover: #6d28d9;
+  --secondary-light: #8b5cf6;
+  --secondary-dark: #5b21b6;
+  
+  --accent-color: #059669;
+  --accent-hover: #047857;
+  --accent-light: #10b981;
+  --accent-dark: #065f46;
+  
+  --success-color: #16a34a;
+  --warning-color: #ea580c;
+  --error-color: #dc2626;
+  
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --bg-accent: #eff6ff;
+  
+  --border-color: #e2e8f0;
+  --border-hover: #cbd5e1;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+  color-scheme: light;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,23 +52,26 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--primary-color);
   text-decoration: inherit;
+  transition: color 0.2s ease;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--primary-hover);
 }
 
 body {
   margin: 0;
   min-height: 100vh;
   width: 100%;
-  
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: var(--text-primary);
 }
 
 button {
@@ -41,27 +81,35 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--primary-color);
+  color: white;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.2s ease;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
-@media (prefers-color-scheme: light) {
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --bg-accent: #1e3a8a;
+    
+    --border-color: #334155;
+    --border-hover: #475569;
   }
 }
