@@ -19,6 +19,34 @@ const LoginForm: React.FC = () => {
     setError(''); // Clear error when user types
   };
 
+  // Test users data
+  const testUsers = [
+    {
+      email: 'admin',
+      password: 'adminalpha',
+      role: 'admin',
+      name: 'Administrator'
+    },
+    {
+      email: 'user1',
+      password: 'user123',
+      role: 'user',
+      name: 'Test User 1'
+    },
+    {
+      email: 'user2',
+      password: 'user456',
+      role: 'user',
+      name: 'Test User 2'
+    },
+    {
+      email: 'moderator',
+      password: 'mod789',
+      role: 'moderator',
+      name: 'Moderator'
+    }
+  ];
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -27,20 +55,24 @@ const LoginForm: React.FC = () => {
     // Simulate API call delay
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    // Check for admin credentials
-    if (formData.email === 'admin' && formData.password === 'adminalpha') {
+    // Check for test user credentials
+    const user = testUsers.find(u => 
+      u.email === formData.email && u.password === formData.password
+    );
+
+    if (user) {
       // Store auth state (in a real app, you'd store a JWT token)
       localStorage.setItem('isAuthenticated', 'true');
       localStorage.setItem('user', JSON.stringify({ 
-        email: 'admin', 
-        role: 'admin',
-        name: 'Administrator'
+        email: user.email, 
+        role: user.role,
+        name: user.name
       }));
       
       // Redirect to dashboard
       navigate('/dashboard');
     } else {
-      setError('Invalid credentials. Use admin/adminalpha to login.');
+      setError('Invalid credentials. Try: admin/adminalpha, user1/user123, user2/user456, or moderator/mod789');
     }
     
     setIsLoading(false);
@@ -90,6 +122,34 @@ const LoginForm: React.FC = () => {
           {isLoading ? 'Signing In...' : 'Sign In'}
         </button>
       </form>
+
+      {/* Test Users Section - Always Visible */}
+      <div className="test-users-section">
+        <h3 className="test-users-title">👥 Usuarios de Prueba</h3>
+        <div className="test-users-grid">
+          {testUsers.map((user, index) => (
+            <div 
+              key={index} 
+              className="test-user-card"
+              onClick={() => {
+                setFormData({
+                  email: user.email,
+                  password: user.password
+                });
+                setError('');
+              }}
+            >
+              <div className="test-user-role">{user.role}</div>
+              <div className="test-user-name">{user.name}</div>
+              <div className="test-user-credentials">
+                <span className="test-user-username">{user.email}</span>
+                <span className="test-user-password">{user.password}</span>
+              </div>
+              <div className="test-user-click">Click para usar</div>
+            </div>
+          ))}
+        </div>
+      </div>
 
       <div className="auth-footer">
         <p>Don't have an account? <a href="/signup">Sign up</a></p>
