@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
           <a href="#privacy" className="footer-link">Privacy Policy</a>
         </div>
         <div className="footer-copyright">
-          <p>&copy;2024 TrackIt. All rights reserved.</p>
+          <p>&copy;2024 economymanager. All rights reserved.</p>
         </div>
       </div>
     </footer>

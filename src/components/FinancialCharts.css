@@ -1,0 +1,294 @@
+.financial-charts {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 2rem;
+  padding-top: 150px;
+  background: linear-gradient(135deg, #f8fdf8 0%, #e8f5e8 50%, #f0f9f0 100%);
+  min-height: 100vh;
+}
+
+.charts-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+}
+
+.charts-header h2 {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.charts-header p {
+  font-size: 1.2rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Metrics Summary */
+.metrics-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.metric-card {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.metric-card svg {
+  color: #4f46e5;
+  background: rgba(79, 70, 229, 0.1);
+  padding: 0.75rem;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.metric-card .metric-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.metric-card .metric-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  display: block;
+}
+
+/* Chart Containers */
+.chart-container {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.chart-container:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.chart-container h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+/* Pie Chart Specific Styles */
+.pie-chart .pie-chart-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.pie-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.legend-item:hover {
+  background: rgba(79, 70, 229, 0.05);
+  transform: translateX(5px);
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.legend-label {
+  flex: 1;
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.95rem;
+}
+
+.legend-value {
+  font-weight: 700;
+  color: #4f46e5;
+  font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .financial-charts {
+    padding: 1rem;
+    padding-top: 120px;
+  }
+  
+  .charts-header h2 {
+    font-size: 2.5rem;
+  }
+  
+  .metrics-summary {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .chart-container {
+    padding: 1.5rem;
+  }
+  
+  .pie-chart .pie-chart-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .pie-legend {
+    order: -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .financial-charts {
+    padding-top: 100px;
+  }
+  
+  .charts-header h2 {
+    font-size: 2rem;
+  }
+  
+  .metric-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .metric-card svg {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .chart-container {
+    padding: 1rem;
+  }
+}
+
+/* Chart Tooltip Customization */
+.recharts-tooltip-wrapper {
+  z-index: 1000;
+}
+
+.recharts-default-tooltip {
+  background-color: white !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  padding: 0.75rem !important;
+}
+
+.recharts-tooltip-label {
+  color: #1f2937 !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.recharts-tooltip-item {
+  color: #6b7280 !important;
+  font-size: 0.9rem !important;
+}
+
+.recharts-tooltip-item-list {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Chart Axis Customization */
+.recharts-cartesian-axis-tick-value {
+  font-size: 12px !important;
+  fill: #6b7280 !important;
+}
+
+.recharts-cartesian-axis-line {
+  stroke: #e5e7eb !important;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: #e5e7eb !important;
+  stroke-dasharray: 3 3 !important;
+}
+
+/* Bar Chart Specific */
+.recharts-bar-rectangle {
+  transition: all 0.3s ease;
+}
+
+.recharts-bar-rectangle:hover {
+  opacity: 0.8;
+  transform: scale(1.02);
+}
+
+/* Line Chart Specific */
+.recharts-line-curve {
+  transition: all 0.3s ease;
+}
+
+.recharts-line-dot {
+  transition: all 0.3s ease;
+}
+
+.recharts-line-dot:hover {
+  transform: scale(1.2);
+}
+
+/* Area Chart Specific */
+.recharts-area-area {
+  transition: all 0.3s ease;
+}
+
+.recharts-area-area:hover {
+  opacity: 0.9;
+}
+
+/* Pie Chart Specific */
+.recharts-pie-sector {
+  transition: all 0.3s ease;
+}
+
+.recharts-pie-sector:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
