@@ -9,7 +9,6 @@ import Login from './pages/Auth/Login/Login'
 import Signup from './pages/Auth/Signup/Signup'
 import './App.css'
 
-// Home page component
 function HomePage() {
   return (
     <>
@@ -34,4 +33,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

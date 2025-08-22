@@ -1,9 +1,13 @@
 import React from 'react';
+import StarfieldBackground from './StarfieldBackground';
 import './Hero.css';
 
 const Hero: React.FC = () => {
   return (
     <section className="hero">
+      {/* Animated Starfield Background */}
+      <StarfieldBackground />
+      
       <div className="hero-container">
         <div className="hero-content">
           <div className="hero-text">
