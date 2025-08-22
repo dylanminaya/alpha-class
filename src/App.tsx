@@ -7,6 +7,7 @@ import FeatureSections from './components/FeatureSections'
 import Footer from './components/Footer'
 import Login from './pages/Auth/Login/Login'
 import Signup from './pages/Auth/Signup/Signup'
+import Dashboard from './pages/Dashboard/Dashboard'
 import './App.css'
 
 function HomePage() {
@@ -29,6 +30,7 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
   )
 }
