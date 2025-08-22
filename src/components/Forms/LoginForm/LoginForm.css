@@ -177,3 +177,18 @@
   color: #334155;
 }
 
+.test-data-hint {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.test-data-hint p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #92400e;
+}
+

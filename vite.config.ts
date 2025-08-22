@@ -6,4 +6,4 @@ export default defineConfig({
   plugins: [react()],
   base: '/'
 })
-//;laksjdf
+//vamo a eto
