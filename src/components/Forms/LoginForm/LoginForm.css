@@ -243,3 +243,22 @@
   border-top: 1px solid var(--border-color);
 }
 
+.test-credentials {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(37, 99, 235, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  text-align: center;
+}
+
+.test-credentials p {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.test-credentials strong {
+  color: var(--primary-color);
+}
+

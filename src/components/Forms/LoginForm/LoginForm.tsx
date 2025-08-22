@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './LoginForm.css';
 
 type LoginFormValues = {
@@ -18,11 +18,23 @@ const LoginForm: React.FC = () => {
     defaultValues: { rememberMe: false }
   });
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   async function onSubmit(values: LoginFormValues) {
     await new Promise((r) => setTimeout(r, 800));
-    // Placeholder: integrate with backend auth API
-    console.log('Login submit', values);
+    
+    // Test data for admin login
+    const testCredentials = {
+      email: 'admin@test.com',
+      password: 'admin123'
+    };
+    
+    if (values.email === testCredentials.email && values.password === testCredentials.password) {
+      console.log('Admin login successful');
+      navigate('/admin');
+    } else {
+      alert('Invalid credentials. Use admin@test.com / admin123 for test login.');
+    }
   }
 
   return (
@@ -102,6 +114,12 @@ const LoginForm: React.FC = () => {
         <div className="form-footer">
           <span>Don't have an account?</span>
           <Link to="/signup" className="link">Sign up</Link>
+        </div>
+        
+        <div className="test-credentials">
+          <p><strong>Test Credentials:</strong></p>
+          <p>Email: admin@test.com</p>
+          <p>Password: admin123</p>
         </div>
       </form>
     </div>
