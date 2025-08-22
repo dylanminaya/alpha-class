@@ -1,59 +1,64 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Don't show navbar on auth pages
-  if (location.pathname === '/login' || location.pathname === '/signup') {
-    return null;
-  }
+  const handleLogin = () => {
+    navigate('/login');
+    setIsMenuOpen(false);
+  };
+
+  const handleSignup = () => {
+    navigate('/signup');
+    setIsMenuOpen(false);
+  };
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
         {/* Logo */}
         <div className="navbar-logo">
-          <Link to="/">
-            <h2>TrackIt</h2>
+          <Link to="/" className="logo-link">
+            <span className="logo-text">TrackIt</span>
           </Link>
         </div>
 
         {/* Desktop Navigation Links */}
         <div className="navbar-links">
-          <a href="#features" className="navbar-link">Features</a>
-          <a href="#pricing" className="navbar-link">Pricing</a>
-          <a href="#support" className="navbar-link">Support</a>
+          <Link to="/features" className="nav-link">Features</Link>
+          <Link to="/pricing" className="nav-link">Pricing</Link>
+          <Link to="/support" className="nav-link">Support</Link>
         </div>
 
-        {/* CTA Buttons */}
+        {/* Desktop CTA Buttons */}
         <div className="navbar-cta">
-          <Link to="/login" className="btn-login">Log In</Link>
-          <Link to="/signup" className="btn-signup">Sign Up</Link>
+          <button className="btn-secondary" onClick={handleLogin}>Log In</button>
+          <button className="btn-primary" onClick={handleSignup}>Sign Up</button>
         </div>
 
         {/* Mobile Hamburger Menu */}
         <div className="hamburger" onClick={toggleMenu}>
-          <span className={isMenuOpen ? 'active' : ''}></span>
-          <span className={isMenuOpen ? 'active' : ''}></span>
-          <span className={isMenuOpen ? 'active' : ''}></span>
+          <span className={`hamburger-line ${isMenuOpen ? 'active' : ''}`}></span>
+          <span className={`hamburger-line ${isMenuOpen ? 'active' : ''}`}></span>
+          <span className={`hamburger-line ${isMenuOpen ? 'active' : ''}`}></span>
         </div>
       </div>
 
       {/* Mobile Menu */}
       <div className={`mobile-menu ${isMenuOpen ? 'active' : ''}`}>
-        <a href="#features" className="mobile-link" onClick={() => setIsMenuOpen(false)}>Features</a>
-        <a href="#pricing" className="mobile-link" onClick={() => setIsMenuOpen(false)}>Pricing</a>
-        <a href="#support" className="mobile-link" onClick={() => setIsMenuOpen(false)}>Support</a>
+        <Link to="/features" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>Features</Link>
+        <Link to="/pricing" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>Pricing</Link>
+        <Link to="/support" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>Support</Link>
         <div className="mobile-cta">
-          <Link to="/login" className="btn-login mobile">Log In</Link>
-          <Link to="/signup" className="btn-signup mobile">Sign Up</Link>
+          <button className="btn-secondary" onClick={handleLogin}>Log In</button>
+          <button className="btn-primary" onClick={handleSignup}>Sign Up</button>
         </div>
       </div>
     </nav>

@@ -1,107 +1,185 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './LoginForm.css';
 
-type LoginFormValues = {
+interface LoginFormData {
   email: string;
   password: string;
   rememberMe: boolean;
-};
+}
 
-const emailPattern = /^(?:[a-zA-Z0-9_'^&+%\-]+(?:\.[a-zA-Z0-9_'^&+%\-]+)*)@(?:[a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,}$/;
+interface LoginFormProps {
+  onSubmit: (data: LoginFormData) => void;
+  isLoading?: boolean;
+  error?: string;
+}
 
-const LoginForm: React.FC = () => {
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginFormValues>({
-    mode: 'onBlur',
-    reValidateMode: 'onChange',
-    defaultValues: { rememberMe: false }
+const LoginForm = ({ onSubmit, isLoading = false, error }: LoginFormProps) => {
+  const [formData, setFormData] = useState<LoginFormData>({
+    email: '',
+    password: '',
+    rememberMe: false,
   });
-  const [showPassword, setShowPassword] = useState(false);
 
-  async function onSubmit(values: LoginFormValues) {
-    await new Promise((r) => setTimeout(r, 800));
-    // Placeholder: integrate with backend auth API
-    console.log('Login submit', values);
-  }
+  const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState<Partial<LoginFormData>>({});
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateForm = () => {
+    const newErrors: Partial<LoginFormData> = {};
+
+    if (!formData.email) {
+      newErrors.email = 'Email is required';
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+    } else if (formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (validateForm()) {
+      onSubmit(formData);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+
+    // Clear error when user starts typing
+    if (errors[name as keyof LoginFormData]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: undefined
+      }));
+    }
+  };
 
   return (
-    <div className="auth-card" role="region" aria-labelledby="login-title">
-      <div className="auth-card-header">
-        <h1 id="login-title" className="auth-title">Welcome Back</h1>
-        <div className="brand">TrackIt</div>
+    <div className="login-form-container">
+      <div className="login-form-header">
+        <div className="login-logo">
+          <span className="logo-text">TrackIt</span>
+        </div>
+        <h1 className="login-title">Welcome Back</h1>
+        <p className="login-subtitle">Sign in to your TrackIt account</p>
+        
+        
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} noValidate className="auth-form">
+      <form className="login-form" onSubmit={handleSubmit}>
+        {error && (
+          <div className="form-error">
+            {error}
+          </div>
+        )}
+
         <div className="form-group">
-          <label htmlFor="email">Email address</label>
+          <label htmlFor="email" className="form-label">
+            Email address
+          </label>
           <input
-            id="email"
             type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className={`form-input ${errors.email ? 'error' : ''}`}
+            placeholder="Enter your email"
             autoComplete="email"
-            autoFocus
-            placeholder="you@example.com"
-            aria-invalid={errors.email ? 'true' : 'false'}
-            {...register('email', {
-              required: 'Email is required',
-              pattern: { value: emailPattern, message: 'Enter a valid email' }
-            })}
+            disabled={isLoading}
           />
           {errors.email && (
-            <p className="form-error" role="alert">{errors.email.message}</p>
+            <span className="field-error">{errors.email}</span>
           )}
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <div className="password-field">
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+          <div className="password-input-container">
             <input
-              id="password"
               type={showPassword ? 'text' : 'password'}
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              className={`form-input password-input ${errors.password ? 'error' : ''}`}
+              placeholder="Enter your password"
               autoComplete="current-password"
-              placeholder="Your password"
-              aria-invalid={errors.password ? 'true' : 'false'}
-              {...register('password', {
-                required: 'Password is required',
-                minLength: { value: 8, message: 'At least 8 characters' }
-              })}
+              disabled={isLoading}
             />
             <button
               type="button"
-              className="toggle-visibility"
+              className="password-toggle"
+              onClick={() => setShowPassword(!showPassword)}
+              disabled={isLoading}
               aria-label={showPassword ? 'Hide password' : 'Show password'}
-              onClick={() => setShowPassword((s) => !s)}
             >
-              {showPassword ? 'Hide' : 'Show'}
+              {showPassword ? '👁️' : '👁️‍🗨️'}
             </button>
           </div>
           {errors.password && (
-            <p className="form-error" role="alert">{errors.password.message}</p>
+            <span className="field-error">{errors.password}</span>
           )}
         </div>
 
-        <div className="form-row">
-          <label className="checkbox">
-            <input type="checkbox" {...register('rememberMe')} />
-            <span>Remember me</span>
+        <div className="form-group checkbox-group">
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              name="rememberMe"
+              checked={formData.rememberMe}
+              onChange={handleChange}
+              className="checkbox-input"
+              disabled={isLoading}
+            />
+            <span className="checkbox-text">Remember me</span>
           </label>
-          <Link to="#" className="link subtle">Forgot Password?</Link>
         </div>
 
-        <button type="submit" className="btn primary" disabled={isSubmitting}>
-          {isSubmitting ? (
-            <>
-              <span className="spinner" aria-hidden="true"></span>
-              <span>Signing in…</span>
-            </>
+        <button
+          type="submit"
+          className="form-submit"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <span className="loading-spinner"></span>
           ) : (
             'Sign In'
           )}
         </button>
 
+        <div className="form-links">
+          <Link to="/forgot-password" className="forgot-link">
+            Forgot your password?
+          </Link>
+        </div>
+
         <div className="form-footer">
-          <span>Don't have an account?</span>
-          <Link to="/signup" className="link">Sign up</Link>
+          <p className="signup-prompt">
+            Don't have an account?{' '}
+            <Link to="/signup" className="signup-link">
+              Sign up
+            </Link>
+          </p>
         </div>
       </form>
     </div>
@@ -109,5 +187,3 @@ const LoginForm: React.FC = () => {
 };
 
 export default LoginForm;
-
-
