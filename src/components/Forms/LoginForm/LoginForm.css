@@ -1,4 +1,4 @@
-/* TrackIt Auth - LoginForm Styles */
+/* Alpha Class Auth - LoginForm Styles */
 
 /* Page background handled in page CSS. This file styles the card and form. */
 
@@ -23,7 +23,7 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: conic-gradient(from 0deg, var(--primary-cyan), var(--primary-magenta), var(--primary-green), var(--primary-cyan));
+  background: conic-gradient(from 0deg, var(--primary-cyan), var(--primary-purple), var(--primary-pink), var(--primary-cyan));
   border-radius: 50%;
   opacity: 0.03;
   animation: modernRotate 12s linear infinite;
@@ -73,10 +73,11 @@
 }
 
 .form-group label {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+  font-size: 1rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+  margin-bottom: 0.25rem;
 }
 
 .form-group input,
@@ -86,15 +87,19 @@
   border: 2px solid var(--border-glow);
   border-radius: 12px;
   padding: 1rem 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(15, 15, 35, 0.95);
   color: var(--text-primary);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
   transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .form-group input::placeholder {
-  color: var(--text-secondary);
-  opacity: 0.7;
+  color: rgba(255, 255, 255, 0.8);
+  opacity: 1;
+  font-weight: 500;
+  font-size: 0.95rem;
 }
 
 .form-group input:focus,
@@ -102,9 +107,10 @@
   outline: none;
   border-color: var(--primary-cyan);
   box-shadow: 
-    0 0 15px rgba(0, 212, 255, 0.2),
-    inset 0 0 5px rgba(0, 212, 255, 0.05);
-  background: rgba(255, 255, 255, 0.08);
+    0 0 20px rgba(0, 212, 255, 0.4),
+    inset 0 0 8px rgba(0, 212, 255, 0.1);
+  background: rgba(20, 20, 40, 0.9);
+  transform: translateY(-2px);
 }
 
 /* Error states */
@@ -156,7 +162,7 @@
   box-sizing: border-box;
   background: var(--gradient-primary);
   color: var(--text-primary);
-  border: 2px solid var(--primary-magenta);
+  border: 2px solid var(--primary-purple);
   border-radius: 12px;
   padding: 1rem 1.5rem;
   font-weight: 600;
@@ -196,11 +202,35 @@
 }
 
 .link {
-  color: #3b82f6;
+  color: var(--primary-cyan);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.link:hover {
+  color: var(--primary-purple);
+  text-shadow: 0 0 8px rgba(139, 92, 246, 0.6);
+  transform: translateY(-1px);
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  transition: width 0.3s ease;
+}
+
+.link:hover::after {
+  width: 100%;
 }
 
 .link.subtle {
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .form-error {
@@ -213,7 +243,8 @@
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  color: #334155;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
 }
 
 .error-message {
@@ -310,7 +341,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--primary-magenta);
+  color: var(--primary-purple);
   margin-bottom: 0.5rem;
   letter-spacing: 1px;
 }

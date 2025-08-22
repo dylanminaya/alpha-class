@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import CardPersonalization from '../../components/CardPersonalization/CardPersonalization';
+import CardPreview from '../../components/CardPreview/CardPreview';
+import DashboardNavbar from '../../components/DashboardNavbar/DashboardNavbar';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -63,7 +66,62 @@ const Dashboard: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [cardFrozen, setCardFrozen] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState('default');
+  const [showCardPersonalization, setShowCardPersonalization] = useState(false);
+  const [dashboardBackground, setDashboardBackground] = useState('linear-gradient(135deg, rgba(15, 15, 35, 0.95) 0%, rgba(26, 26, 46, 0.95) 100%)');
   const navigate = useNavigate();
+
+  // Card themes definition
+  const cardThemes = [
+    {
+      id: 'default',
+      name: 'Default',
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      textColor: '#ffffff',
+      accentColor: '#00d4ff'
+    },
+    {
+      id: 'midnight',
+      name: 'Midnight',
+      background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+      textColor: '#ffffff',
+      accentColor: '#00d4ff',
+      pattern: 'radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.15) 0%, transparent 50%)'
+    },
+    {
+      id: 'aurora',
+      name: 'Aurora',
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+      textColor: '#ffffff',
+      accentColor: '#00ffff',
+      pattern: 'radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%)'
+    },
+    {
+      id: 'sunset',
+      name: 'Sunset',
+      background: 'linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #ff9ff3 100%)',
+      textColor: '#ffffff',
+      accentColor: '#ffffff',
+      pattern: 'radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)'
+    },
+    {
+      id: 'ocean',
+      name: 'Ocean',
+      background: 'linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%)',
+      textColor: '#ffffff',
+      accentColor: '#00d4ff',
+      pattern: 'radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 70%)'
+    },
+    {
+      id: 'emerald',
+      name: 'Emerald',
+      background: 'linear-gradient(135deg, #2d5016 0%, #4a7c59 50%, #6b8e23 100%)',
+      textColor: '#ffffff',
+      accentColor: '#00ff88',
+      pattern: 'radial-gradient(circle at 30% 70%, rgba(0, 255, 136, 0.1) 0%, transparent 50%)'
+    }
+  ];
+
+  const currentTheme = cardThemes.find(theme => theme.id === selectedTheme) || cardThemes[0];
 
   // Mock data for charts
   const monthlyExpenses = {
@@ -240,6 +298,18 @@ const Dashboard: React.FC = () => {
     console.log(`Theme changed to: ${theme}`);
   };
 
+  const handleCardPersonalization = () => {
+    setShowCardPersonalization(true);
+  };
+
+  const handleClosePersonalization = () => {
+    setShowCardPersonalization(false);
+  };
+
+  const handleBackgroundChange = (background: string) => {
+    setDashboardBackground(background);
+  };
+
   if (isLoading) {
     return (
       <div className="dashboard-loading">
@@ -250,18 +320,11 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <div className="dashboard">
-      <header className="dashboard-header">
-        <div className="header-content">
-          <h1>Alpha Class Dashboard</h1>
-          <div className="user-info">
-            <span>Welcome, {user?.name || 'Admin'}</span>
-            <button onClick={handleLogout} className="logout-btn">
-              Logout
-            </button>
-          </div>
-        </div>
-      </header>
+    <div className="dashboard" style={{ background: dashboardBackground }}>
+             <DashboardNavbar 
+         onBackgroundChange={handleBackgroundChange}
+         currentBackground="lavender"
+       />
 
       <main className="dashboard-main">
         {/* Quick Stats Cards */}
@@ -308,104 +371,128 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* Charts Section */}
-        <div className="charts-grid">
-          {/* Expense Trends */}
-          <div className="chart-card">
-            <h3>📈 Monthly Expense Trends</h3>
-            <div className="chart-container">
-              <Line data={monthlyExpenses} options={chartOptions} />
-            </div>
-          </div>
+                 {/* Charts Section */}
+         <div className="charts-grid">
+           {/* Expense Trends */}
+           <div className="chart-card">
+             <h3>📈 Monthly Expense Trends</h3>
+             <div className="chart-container">
+               <Line data={monthlyExpenses} options={chartOptions} />
+             </div>
+           </div>
 
-          {/* Category Breakdown */}
-          <div className="chart-card">
-            <h3>🍕 Expense Categories</h3>
-            <div className="chart-container">
-              <Doughnut data={categoryExpenses} options={doughnutOptions} />
-            </div>
-          </div>
+           {/* Category Breakdown */}
+           <div className="chart-card">
+             <h3>🍕 Expense Categories</h3>
+             <div className="chart-container">
+               <Doughnut data={categoryExpenses} options={doughnutOptions} />
+             </div>
+           </div>
 
-          {/* Debt Management */}
-          <div className="chart-card">
-            <h3>💳 Debt Progress</h3>
-            <div className="chart-container">
-              <Bar data={debtProgress} options={chartOptions} />
-            </div>
-          </div>
+           {/* Debt Management */}
+           <div className="chart-card">
+             <h3>💳 Debt Progress</h3>
+             <div className="chart-container">
+               <Bar data={debtProgress} options={chartOptions} />
+             </div>
+           </div>
+         </div>
 
-          {/* Quick Actions */}
-          <div className="chart-card">
-            <h3>⚡ Quick Actions</h3>
-            <div className="quick-actions">
-              <button className="action-btn primary">
-                <span>➕</span>
-                Add Expense
-              </button>
-              <button className="action-btn secondary">
-                <span>📊</span>
-                View Reports
-              </button>
-              <button className="action-btn secondary">
-                <span>🎯</span>
-                Manage Budget
-              </button>
-              <button className="action-btn secondary">
-                <span>💳</span>
-                Card Settings
-              </button>
-            </div>
-          </div>
-        </div>
+                                       {/* Quick Actions Section */}
+           <div className="quick-actions-section">
+             <div className="chart-card">
+               <h3>⚡ Quick Actions</h3>
+               <div className="quick-actions">
+                 <button className="action-btn primary">
+                   <span>➕</span>
+                   Add Expense
+                 </button>
+                 <button className="action-btn secondary">
+                   <span>📊</span>
+                   View Reports
+                 </button>
+                 <button className="action-btn secondary">
+                   <span>🎯</span>
+                   Manage Budget
+                 </button>
+                 <button className="action-btn secondary" onClick={handleCardPersonalization}>
+                   <span>💳</span>
+                   Card Settings
+                 </button>
+               </div>
+             </div>
+           </div>
 
-        {/* Features Grid */}
-        <div className="features-grid">
-          <div className="feature-card">
-            <div className="feature-icon">📱</div>
-            <h3>Quick Add from Mobile</h3>
-            <p>Add expenses instantly with smart categorization and photo receipts</p>
-            <div className="feature-stats">
-              <span>Last 7 days: 12 expenses</span>
+                   {/* Features Grid */}
+          <div className="features-grid">
+            <div className="feature-card">
+              <div className="feature-icon">📱</div>
+              <h3>Quick Add from Mobile</h3>
+              <p>Add expenses instantly with smart categorization and photo receipts</p>
+              <div className="feature-stats">
+                <span>Last 7 days: 12 expenses</span>
+              </div>
             </div>
-          </div>
 
-          <div className="feature-card">
-            <div className="feature-icon">🎯</div>
-            <h3>Smart Budget Management</h3>
-            <p>Create flexible budgets with custom limits and intelligent alerts</p>
-            <div className="feature-stats">
-              <span>3 active budgets</span>
+            <div className="feature-card">
+              <div className="feature-icon">🎯</div>
+              <h3>Smart Budget Management</h3>
+              <p>Create flexible budgets with custom limits and intelligent alerts</p>
+              <div className="feature-stats">
+                <span>3 active budgets</span>
+              </div>
             </div>
-          </div>
 
-          <div className="feature-card">
-            <div className="feature-icon">💳</div>
-            <h3>Card Personalization</h3>
-            <p>Choose from multiple themes and preview your card in real-time</p>
-            <div className="theme-selector">
-              {['default', 'dark', 'gradient', 'minimal'].map((theme) => (
-                <button
-                  key={theme}
-                  className={`theme-btn ${selectedTheme === theme ? 'active' : ''}`}
-                  onClick={() => handleThemeChange(theme)}
-                >
-                  {theme}
-                </button>
-              ))}
+            <div className="feature-card">
+              <div className="feature-icon">💳</div>
+              <h3>Card Personalization</h3>
+              <p>Choose from multiple themes and preview your card in real-time</p>
+              
+                             {/* Theme Selector */}
+               <div className="theme-selector">
+                 {['default', 'midnight', 'aurora', 'sunset', 'ocean', 'emerald'].map((theme) => (
+                   <button
+                     key={theme}
+                     className={`theme-btn ${selectedTheme === theme ? 'active' : ''}`}
+                     onClick={() => handleThemeChange(theme)}
+                   >
+                     {theme}
+                   </button>
+                 ))}
+               </div>
+              
             </div>
-          </div>
 
-          <div className="feature-card">
-            <div className="feature-icon">🔒</div>
-            <h3>Freeze Card Functionality</h3>
-            <p>Freeze or unfreeze your card instantly for security and peace of mind</p>
-            <div className="freeze-status">
-              <span className={`status-indicator ${cardFrozen ? 'frozen' : 'active'}`}>
-                {cardFrozen ? '🔒 Frozen' : '✅ Active'}
-              </span>
-            </div>
-          </div>
-        </div>
+                         <div className="feature-card">
+               <div className="feature-icon">🔒</div>
+               <h3>Freeze Card Functionality</h3>
+               <p>Freeze or unfreeze your card instantly for security and peace of mind</p>
+               <div className="freeze-status">
+                 <span className={`status-indicator ${cardFrozen ? 'frozen' : 'active'}`}>
+                   {cardFrozen ? '🔒 Frozen' : '✅ Active'}
+                 </span>
+               </div>
+             </div>
+
+             <div className="feature-card">
+               <div className="feature-icon">📊</div>
+               <h3>Debt Management</h3>
+               <p>Plan repayments, compare strategies, and stay motivated to reach zero</p>
+               <div className="feature-stats">
+                 <span>4 active debts</span>
+               </div>
+             </div>
+
+             <div className="feature-card">
+               <div className="feature-icon">🎨</div>
+               <h3>Expense Tracking</h3>
+               <p>Track daily expenses, categorize automatically, and view historical insights</p>
+               <div className="feature-stats">
+                 <span>Monthly trend: +12%</span>
+               </div>
+             </div>
+             
+           </div>
 
         {/* Recent Transactions */}
         <div className="transactions-section">
@@ -461,6 +548,21 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
       </main>
+
+      {/* Card Personalization Modal */}
+      {showCardPersonalization && (
+        <div className="card-personalization-modal">
+          <div className="modal-overlay" onClick={handleClosePersonalization}></div>
+          <div className="modal-content">
+            <div className="modal-header">
+              <button className="close-btn" onClick={handleClosePersonalization}>
+                ✕
+              </button>
+            </div>
+            <CardPersonalization />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
