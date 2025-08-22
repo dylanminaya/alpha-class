@@ -1,15 +1,31 @@
 .hero {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: linear-gradient(135deg, var(--bg-accent) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%);
   width: 100%;
   padding: 4rem 2rem;
   min-height: calc(100vh - 80px);
   display: flex;
   align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .hero-container {
   margin: 0 auto;
   width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-content {
@@ -30,36 +46,56 @@
 .hero-headline {
   font-size: 3.5rem;
   font-weight: 800;
-  color: #1f2937;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 50%, var(--secondary-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   line-height: 1.1;
   margin: 0;
 }
 
 .hero-subheadline {
   font-size: 1.25rem;
-  color: #6b7280;
+  color: var(--text-secondary);
   line-height: 1.6;
   margin: 0;
 }
 
 .hero-cta {
-  background-color: #4f46e5;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
   border: none;
   padding: 1rem 2rem;
   font-size: 1.1rem;
   font-weight: 600;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   cursor: pointer;
   transition: all 0.3s ease;
   align-self: flex-start;
-  box-shadow: 0 4px 6px rgba(79, 70, 229, 0.3);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
 }
 
 .hero-cta:hover {
-  background-color: #3730a3;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 12px rgba(79, 70, 229, 0.4);
+  background: linear-gradient(135deg, var(--primary-hover), var(--secondary-hover));
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-xl);
+}
+
+.hero-cta:hover::before {
+  left: 100%;
 }
 
 .hero-visual {
@@ -72,22 +108,37 @@
 .phone-mockup {
   width: 280px;
   height: 560px;
-  background: #1f2937;
+  background: linear-gradient(145deg, var(--text-primary), #334155);
   border-radius: 2.5rem;
   padding: 0.5rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-xl);
   transform: rotate(5deg);
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.phone-mockup::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+  border-radius: 2.6rem;
+  z-index: -1;
+  opacity: 0.3;
 }
 
 .phone-mockup:hover {
   transform: rotate(5deg) scale(1.05);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
 }
 
 .phone-screen {
   width: 100%;
   height: 100%;
-  background: white;
+  background: var(--bg-primary);
   border-radius: 2rem;
   padding: 1rem;
   display: flex;
@@ -104,7 +155,7 @@
   align-items: center;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #1f2937;
+  color: var(--text-primary);
 }
 
 .signal-battery {
@@ -123,25 +174,43 @@
 .app-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1f2937;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin: 0;
   text-align: center;
 }
 
 .visa-card {
-  background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
   padding: 1.5rem;
   border-radius: 1rem;
   color: white;
   margin: 0 auto;
   width: 200px;
-  box-shadow: 0 8px 16px rgba(79, 70, 229, 0.3);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.visa-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  transform: rotate(45deg);
 }
 
 .card-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .visa-logo {
@@ -161,7 +230,7 @@
 }
 
 .integration-message p {
-  color: #6b7280;
+  color: var(--text-muted);
   margin: 0 0 1rem 0;
   font-size: 0.95rem;
 }
@@ -175,10 +244,11 @@
 .tap-circle {
   width: 50px;
   height: 50px;
-  border: 3px solid #4f46e5;
+  border: 3px solid var(--primary-color);
   border-radius: 50%;
   position: relative;
   animation: tapPulse 2s infinite;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
 }
 
 .tap-circle::after {
@@ -189,8 +259,9 @@
   transform: translate(-50%, -50%);
   width: 20px;
   height: 20px;
-  background: #4f46e5;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   border-radius: 50%;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
 }
 
 @keyframes tapPulse {

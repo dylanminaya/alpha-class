@@ -2,6 +2,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import FeaturesCarousel from './components/FeaturesCarousel/FeaturesCarousel'
 import Footer from './components/Footer'
 import Login from './pages/Auth/Login/Login'
 import Signup from './pages/Auth/Signup/Signup'
@@ -14,6 +15,7 @@ function HomePage() {
       <Navbar />
       <main>
         <Hero />
+        <FeaturesCarousel />
       </main>
       <Footer />
     </>
