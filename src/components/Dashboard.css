@@ -4,10 +4,11 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  padding-top: 150px;
   position: relative;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #f8fdf8 0%, #e8f5e8 50%, #f0f9f0 100%);
+  color: #2e7d32;
 }
 
 /* Partículas flotantes */
@@ -19,24 +20,42 @@
 
 /* Header del Dashboard */
 .dashboard-header {
-  text-align: center;
   margin-bottom: 3rem;
 }
 
-.dashboard-header h1 {
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.header-text {
+  flex: 1;
+}
+
+.header-text h1 {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  background: linear-gradient(45deg, #fff, #f0f8ff);
+  background: linear-gradient(45deg, #2e7d32, #4caf50);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.dashboard-header p {
+.header-text p {
   font-size: 1.2rem;
-  opacity: 0.9;
+  opacity: 0.8;
   font-weight: 300;
+  color: #4a6741;
+}
+
+.header-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 /* Resumen de Balance */
@@ -48,14 +67,15 @@
 }
 
 .main-balance {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 2rem;
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(76, 175, 80, 0.2);
+  box-shadow: 0 8px 32px rgba(76, 175, 80, 0.1);
 }
 
 .balance-icon {
@@ -84,15 +104,16 @@
 }
 
 .balance-card {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   border-radius: 15px;
   padding: 1.5rem;
   display: flex;
   align-items: center;
   gap: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(76, 175, 80, 0.2);
   transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(76, 175, 80, 0.1);
 }
 
 .balance-card.income {
@@ -161,9 +182,9 @@
 }
 
 .export-btn {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.8);
+  color: #2e7d32;
+  border: 1px solid rgba(76, 175, 80, 0.3);
   padding: 0.75rem 1.5rem;
   border-radius: 20px;
   font-size: 0.9rem;
@@ -176,8 +197,9 @@
 }
 
 .export-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.9);
   transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
 }
 
 .export-btn:disabled {
@@ -187,20 +209,23 @@
 
 .export-btn.csv {
   border-color: #2196f3;
+  color: #2196f3;
 }
 
 .export-btn.excel {
   border-color: #4caf50;
+  color: #4caf50;
 }
 
 /* Formulario de Transacción */
 .transaction-form {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 2rem;
   margin-bottom: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(76, 175, 80, 0.2);
+  box-shadow: 0 8px 32px rgba(76, 175, 80, 0.1);
 }
 
 .transaction-form h3 {
@@ -230,16 +255,16 @@
 .form-group input,
 .form-group select {
   padding: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(76, 175, 80, 0.3);
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  background: rgba(255, 255, 255, 0.9);
+  color: #2e7d32;
   font-size: 1rem;
   backdrop-filter: blur(10px);
 }
 
 .form-group input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(76, 175, 80, 0.6);
 }
 
 .form-group input:focus,
@@ -289,15 +314,16 @@
 }
 
 .transaction-item {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   border-radius: 15px;
   padding: 1.5rem;
   display: flex;
   align-items: center;
   gap: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(76, 175, 80, 0.2);
   transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(76, 175, 80, 0.1);
 }
 
 .transaction-item.income {
@@ -383,6 +409,17 @@
   opacity: 0.7;
 }
 
+/* Sección del Gráfico */
+.chart-section {
+  margin-bottom: 3rem;
+}
+
+.chart-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
 /* Sección de Planificación */
 .planning-section {
   margin-bottom: 2rem;
@@ -401,13 +438,14 @@
 }
 
 .planning-card {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 2rem;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(76, 175, 80, 0.2);
   transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(76, 175, 80, 0.1);
 }
 
 .planning-card svg {
@@ -444,9 +482,39 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+  .dashboard-container {
+    max-width: 95%;
+    padding: 1.5rem;
+    padding-top: 150px;
+  }
+  
+  .balance-summary {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  
+  .main-balance {
+    grid-column: 1 / -1;
+  }
+}
+
 @media (max-width: 768px) {
   .dashboard-container {
     padding: 1rem;
+    padding-top: 120px;
+    max-width: 100%;
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .header-controls {
+    order: -1;
   }
 
   .dashboard-header h1 {
@@ -461,15 +529,18 @@
   .main-balance {
     flex-direction: column;
     text-align: center;
+    padding: 1.5rem;
   }
 
   .action-buttons {
     flex-direction: column;
     align-items: stretch;
+    gap: 1rem;
   }
 
   .export-buttons {
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   .form-row {
@@ -478,25 +549,89 @@
 
   .planning-cards {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .transaction-form {
+    padding: 1.5rem;
+  }
+  
+  .transaction-item {
+    padding: 1rem;
   }
 }
 
 @media (max-width: 480px) {
+  .dashboard-container {
+    padding: 0.75rem;
+    padding-top: 100px;
+  }
+  
   .dashboard-header h1 {
     font-size: 1.5rem;
+  }
+  
+  .dashboard-header p {
+    font-size: 1rem;
   }
 
   .balance-amount {
     font-size: 2rem;
+  }
+  
+  .main-balance {
+    padding: 1rem;
+  }
+  
+  .balance-card {
+    padding: 1rem;
   }
 
   .transaction-item {
     flex-direction: column;
     text-align: center;
     gap: 0.5rem;
+    padding: 1rem;
   }
 
   .transaction-amount {
     align-self: center;
+  }
+  
+  .planning-card {
+    padding: 1.5rem;
+  }
+  
+  .action-buttons {
+    gap: 0.75rem;
+  }
+  
+  .add-transaction-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .dashboard-container {
+    padding: 0.5rem;
+    padding-top: 80px;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 1.25rem;
+  }
+  
+  .balance-amount {
+    font-size: 1.75rem;
+  }
+  
+  .main-balance,
+  .balance-card {
+    padding: 0.75rem;
+  }
+  
+  .transaction-form {
+    padding: 1rem;
   }
 }

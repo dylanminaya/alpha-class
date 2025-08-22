@@ -7,23 +7,19 @@ import {
   Menu,
   X,
   Globe,
-  User,
-  ChevronDown
+  Settings as SettingsIcon
 } from 'lucide-react';
 import './Navbar.css';
+import Settings from './Settings';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
-  const [currentLanguage, setCurrentLanguage] = useState('Español');
+  const [currentLanguage] = useState('English');
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const location = useLocation();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  const toggleLanguageMenu = () => {
-    setIsLanguageMenuOpen(!isLanguageMenuOpen);
   };
 
   // Don't show navbar on auth pages
@@ -33,70 +29,32 @@ const Navbar: React.FC = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
-  const languages = [
-    { code: 'es', name: 'Español', flag: '🇪🇸' },
-    { code: 'en', name: 'English', flag: '🇺🇸' },
-    { code: 'fr', name: 'Français', flag: '🇫🇷' },
-    { code: 'de', name: 'Deutsch', flag: '🇩🇪' }
-  ];
 
-  const handleLanguageChange = (language: { code: string, name: string, flag: string }) => {
-    setCurrentLanguage(language.name);
-    setIsLanguageMenuOpen(false);
-    // Aquí se implementaría la lógica de cambio de idioma
-  };
 
   return (
     <nav className="navbar">
-      {/* Header con Logo y Controles */}
+      {/* Header with Logo and Controls */}
       <div className="navbar-header">
         <div className="navbar-container">
-          {/* Logo a la izquierda */}
+          {/* Logo on the left */}
           <div className="navbar-logo">
             <Link to="/">
               <h2>economymanager</h2>
             </Link>
           </div>
 
-          {/* Controles a la derecha */}
+          {/* Controls on the right */}
           <div className="navbar-controls">
             {/* CTA Buttons */}
             <div className="navbar-cta">
-              <Link to="/login" className="btn-login">Iniciar Sesión</Link>
-              <Link to="/signup" className="btn-signup">Registrarse</Link>
-            </div>
-
-            {/* Language Selector */}
-            <div className="language-selector">
-              <button 
-                className="language-btn"
-                onClick={toggleLanguageMenu}
-              >
-                <Globe size={18} />
-                <span>{currentLanguage}</span>
-                <ChevronDown size={16} />
-              </button>
-              
-              {isLanguageMenuOpen && (
-                <div className="language-dropdown">
-                  {languages.map((language) => (
-                    <button
-                      key={language.code}
-                      className="language-option"
-                      onClick={() => handleLanguageChange(language)}
-                    >
-                      <span className="language-flag">{language.flag}</span>
-                      <span>{language.name}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
+              <Link to="/login" className="btn-login">Log In</Link>
+              <Link to="/signup" className="btn-signup">Sign Up</Link>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Navbar de Navegación */}
+      {/* Navigation Navbar */}
       <div className="navbar-navigation">
         <div className="navbar-container">
           <div className="navbar-links">
@@ -112,22 +70,23 @@ const Navbar: React.FC = () => {
               className={`navbar-link ${isActive('/charts') ? 'active' : ''}`}
             >
               <BarChart3 size={18} />
-              Análisis
+              Analysis
             </Link>
             <Link 
               to="/budget" 
               className={`navbar-link ${isActive('/budget') ? 'active' : ''}`}
             >
               <Target size={18} />
-              Presupuesto
+              Budget
             </Link>
-            <Link 
-              to="/profile" 
-              className={`navbar-link ${isActive('/profile') ? 'active' : ''}`}
+            <button 
+              className="navbar-link settings-nav-btn"
+              onClick={() => setIsSettingsOpen(true)}
+              title="Settings"
             >
-              <User size={18} />
-              Mi Cuenta
-            </Link>
+              <SettingsIcon size={18} />
+              Settings
+            </button>
           </div>
 
           {/* Mobile Hamburger Menu */}
@@ -153,7 +112,7 @@ const Navbar: React.FC = () => {
           onClick={() => setIsMenuOpen(false)}
         >
           <BarChart3 size={18} />
-          Análisis
+          Analysis
         </Link>
         <Link 
           to="/budget" 
@@ -161,30 +120,36 @@ const Navbar: React.FC = () => {
           onClick={() => setIsMenuOpen(false)}
         >
           <Target size={18} />
-          Presupuesto
+          Budget
         </Link>
-        <Link 
-          to="/profile" 
-          className={`mobile-link ${isActive('/profile') ? 'active' : ''}`}
-          onClick={() => setIsMenuOpen(false)}
+        <button 
+          className="mobile-link settings-nav-btn"
+          onClick={() => {
+            setIsSettingsOpen(true);
+            setIsMenuOpen(false);
+          }}
         >
-          <User size={18} />
-          Mi Cuenta
-        </Link>
+          <SettingsIcon size={18} />
+          Settings
+        </button>
+
         
         {/* Mobile Language and User Options */}
         <div className="mobile-controls">
           <div className="mobile-language">
             <Globe size={18} />
-            <span>Idioma: {currentLanguage}</span>
+            <span>Language: {currentLanguage}</span>
           </div>
         </div>
         
         <div className="mobile-cta">
-          <Link to="/login" className="btn-login mobile">Iniciar Sesión</Link>
-          <Link to="/signup" className="btn-signup mobile">Registrarse</Link>
+          <Link to="/login" className="btn-login mobile">Log In</Link>
+          <Link to="/signup" className="btn-signup mobile">Sign Up</Link>
         </div>
       </div>
+      
+      {/* Settings Modal */}
+      <Settings isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
     </nav>
   );
 };

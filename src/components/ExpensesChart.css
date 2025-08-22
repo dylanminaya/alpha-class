@@ -1,0 +1,101 @@
+.expenses-chart-container {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 253, 248, 0.9) 100%);
+  backdrop-filter: blur(20px);
+  border-radius: 25px;
+  padding: 2.5rem;
+  margin: 2rem 0;
+  border: 2px solid rgba(76, 175, 80, 0.15);
+  height: 400px;
+  position: relative;
+  box-shadow: 
+    0 20px 40px rgba(76, 175, 80, 0.1),
+    0 8px 16px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.expenses-chart-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 25px 50px rgba(76, 175, 80, 0.15),
+    0 12px 24px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.expenses-chart-empty {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 253, 248, 0.9) 100%);
+  backdrop-filter: blur(20px);
+  border-radius: 25px;
+  padding: 3rem;
+  margin: 2rem 0;
+  border: 2px solid rgba(76, 175, 80, 0.15);
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #2e7d32;
+  box-shadow: 
+    0 20px 40px rgba(76, 175, 80, 0.1),
+    0 8px 16px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.expenses-chart-empty::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(76, 175, 80, 0.03) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.expenses-chart-empty h3 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #2e7d32, #4caf50);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  z-index: 1;
+}
+
+.expenses-chart-empty p {
+  opacity: 0.8;
+  font-size: 1.1rem;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+  color: #4a6741;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .expenses-chart-container,
+  .expenses-chart-empty {
+    height: 300px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .expenses-chart-container,
+  .expenses-chart-empty {
+    height: 250px;
+    padding: 1rem;
+  }
+}

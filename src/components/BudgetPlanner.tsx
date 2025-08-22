@@ -32,17 +32,17 @@ interface BudgetGoal {
 
 const BudgetPlanner: React.FC = () => {
   const [budgetCategories, setBudgetCategories] = useState<BudgetCategory[]>([
-    { id: '1', name: 'Herramientas de Trabajo', planned: 200, spent: 150, color: '#4f46e5' },
-    { id: '2', name: 'Oficina & Coworking', planned: 300, spent: 280, color: '#10b981' },
-    { id: '3', name: 'Marketing & Publicidad', planned: 150, spent: 120, color: '#f59e0b' },
-    { id: '4', name: 'Educación & Cursos', planned: 100, spent: 80, color: '#ef4444' },
-    { id: '5', name: 'Software & Suscripciones', planned: 80, spent: 75, color: '#8b5cf6' },
+    { id: '1', name: 'Work Tools', planned: 200, spent: 150, color: '#4f46e5' },
+    { id: '2', name: 'Office & Coworking', planned: 300, spent: 280, color: '#10b981' },
+    { id: '3', name: 'Marketing & Advertising', planned: 150, spent: 120, color: '#f59e0b' },
+    { id: '4', name: 'Education & Courses', planned: 100, spent: 80, color: '#ef4444' },
+    { id: '5', name: 'Software & Subscriptions', planned: 80, spent: 75, color: '#8b5cf6' },
   ]);
 
   const [budgetGoals, setBudgetGoals] = useState<BudgetGoal[]>([
-    { id: '1', name: 'Ahorro Mensual', target: 1000, current: 750, deadline: '2024-01-31', status: 'on-track' },
-    { id: '2', name: 'Fondo de Emergencia', target: 5000, current: 3200, deadline: '2024-06-30', status: 'at-risk' },
-    { id: '3', name: 'Inversión en Equipo', target: 800, current: 800, deadline: '2024-02-15', status: 'completed' },
+    { id: '1', name: 'Monthly Savings', target: 1000, current: 750, deadline: '2024-01-31', status: 'on-track' },
+    { id: '2', name: 'Emergency Fund', target: 5000, current: 3200, deadline: '2024-06-30', status: 'at-risk' },
+    { id: '3', name: 'Equipment Investment', target: 800, current: 800, deadline: '2024-02-15', status: 'completed' },
   ]);
 
   const [showAddCategory, setShowAddCategory] = useState(false);
@@ -150,11 +150,11 @@ const BudgetPlanner: React.FC = () => {
       transition={{ duration: 0.6 }}
     >
       <div className="budget-header">
-        <h1>Planificador de Presupuesto</h1>
-        <p>Organiza y controla tus finanzas mensuales</p>
+        <h1>Budget Planner</h1>
+        <p>Organize and control your monthly finances</p>
       </div>
 
-      {/* Resumen del Presupuesto */}
+      {/* Budget Summary */}
       <motion.div 
         className="budget-summary"
         initial={{ opacity: 0, scale: 0.9 }}
@@ -162,27 +162,27 @@ const BudgetPlanner: React.FC = () => {
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         <div className="summary-card total-budget">
-          <h3>Presupuesto Total</h3>
+          <h3>Total Budget</h3>
           <span className="amount">${totalPlanned.toLocaleString()}</span>
         </div>
         
         <div className="summary-card spent-budget">
-          <h3>Gastado</h3>
+          <h3>Spent</h3>
           <span className="amount">${totalSpent.toLocaleString()}</span>
         </div>
         
         <div className="summary-card remaining-budget">
-          <h3>Restante</h3>
+          <h3>Remaining</h3>
           <span className="amount">${remainingBudget.toLocaleString()}</span>
         </div>
         
         <div className="summary-card utilization">
-          <h3>Utilización</h3>
+          <h3>Utilization</h3>
           <span className="amount">{budgetUtilization.toFixed(1)}%</span>
         </div>
       </motion.div>
 
-      {/* Categorías de Presupuesto */}
+      {/* Budget Categories */}
       <motion.div 
         className="budget-categories"
         initial={{ opacity: 0, y: 20 }}
@@ -190,7 +190,7 @@ const BudgetPlanner: React.FC = () => {
         transition={{ duration: 0.5, delay: 0.3 }}
       >
         <div className="section-header">
-          <h2>Categorías de Presupuesto</h2>
+          <h2>Budget Categories</h2>
           <motion.button
             className="add-btn"
             onClick={() => setShowAddCategory(!showAddCategory)}
@@ -198,7 +198,7 @@ const BudgetPlanner: React.FC = () => {
             whileTap={{ scale: 0.95 }}
           >
             <Plus size={20} />
-            Agregar Categoría
+            Add Category
           </motion.button>
         </div>
 
@@ -212,13 +212,13 @@ const BudgetPlanner: React.FC = () => {
             <div className="form-row">
               <input
                 type="text"
-                placeholder="Nombre de la categoría"
+                placeholder="Category name"
                 value={newCategory.name}
                 onChange={(e) => setNewCategory({ ...newCategory, name: e.target.value })}
               />
               <input
                 type="number"
-                placeholder="Presupuesto planeado"
+                placeholder="Planned budget"
                 value={newCategory.planned}
                 onChange={(e) => setNewCategory({ ...newCategory, planned: e.target.value })}
               />
@@ -227,9 +227,9 @@ const BudgetPlanner: React.FC = () => {
                 value={newCategory.color}
                 onChange={(e) => setNewCategory({ ...newCategory, color: e.target.value })}
               />
-              <button onClick={handleAddCategory} className="submit-btn">
-                Agregar
-              </button>
+                              <button onClick={handleAddCategory} className="submit-btn">
+                  Add
+                </button>
             </div>
           </motion.div>
         )}
@@ -283,7 +283,7 @@ const BudgetPlanner: React.FC = () => {
               </div>
 
               <div className="category-input">
-                <label>Actualizar gasto:</label>
+                <label>Update expense:</label>
                 <input
                   type="number"
                   value={category.spent}
@@ -296,7 +296,7 @@ const BudgetPlanner: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* Metas Financieras */}
+      {/* Financial Goals */}
       <motion.div 
         className="financial-goals"
         initial={{ opacity: 0, y: 20 }}
@@ -304,7 +304,7 @@ const BudgetPlanner: React.FC = () => {
         transition={{ duration: 0.5, delay: 0.4 }}
       >
         <div className="section-header">
-          <h2>Metas Financieras</h2>
+          <h2>Financial Goals</h2>
           <motion.button
             className="add-btn"
             onClick={() => setShowAddGoal(!showAddGoal)}
@@ -312,7 +312,7 @@ const BudgetPlanner: React.FC = () => {
             whileTap={{ scale: 0.95 }}
           >
             <Plus size={20} />
-            Agregar Meta
+            Add Goal
           </motion.button>
         </div>
 
@@ -326,13 +326,13 @@ const BudgetPlanner: React.FC = () => {
             <div className="form-row">
               <input
                 type="text"
-                placeholder="Nombre de la meta"
+                placeholder="Goal name"
                 value={newGoal.name}
                 onChange={(e) => setNewGoal({ ...newGoal, name: e.target.value })}
               />
               <input
                 type="number"
-                placeholder="Meta objetivo"
+                placeholder="Target goal"
                 value={newGoal.target}
                 onChange={(e) => setNewGoal({ ...newGoal, target: e.target.value })}
               />
@@ -341,9 +341,9 @@ const BudgetPlanner: React.FC = () => {
                 value={newGoal.deadline}
                 onChange={(e) => setNewGoal({ ...newGoal, deadline: e.target.value })}
               />
-              <button onClick={handleAddGoal} className="submit-btn">
-                Agregar
-              </button>
+                              <button onClick={handleAddGoal} className="submit-btn">
+                  Add
+                </button>
             </div>
           </motion.div>
         )}
@@ -388,9 +388,9 @@ const BudgetPlanner: React.FC = () => {
               </div>
 
               <div className="goal-details">
-                <span className="deadline">Fecha límite: {goal.deadline}</span>
+                <span className="deadline">Deadline: {goal.deadline}</span>
                 <div className="goal-input">
-                  <label>Progreso actual:</label>
+                  <label>Current progress:</label>
                   <input
                     type="number"
                     value={goal.current}
@@ -404,14 +404,14 @@ const BudgetPlanner: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* Consejos de Ahorro */}
+      {/* Savings Tips */}
       <motion.div 
         className="savings-tips"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.5 }}
       >
-        <h2>Consejos para Ahorrar</h2>
+        <h2>Savings Tips</h2>
         <div className="tips-grid">
           <motion.div 
             className="tip-card"
@@ -419,8 +419,8 @@ const BudgetPlanner: React.FC = () => {
             transition={{ type: "spring", stiffness: 300 }}
           >
             <TrendingUp size={32} />
-            <h3>Establece Prioridades</h3>
-            <p>Identifica qué gastos son esenciales y cuáles puedes reducir o eliminar.</p>
+            <h3>Set Priorities</h3>
+            <p>Identify which expenses are essential and which ones you can reduce or eliminate.</p>
           </motion.div>
 
           <motion.div 
@@ -429,8 +429,8 @@ const BudgetPlanner: React.FC = () => {
             transition={{ type: "spring", stiffness: 300 }}
           >
             <Target size={32} />
-            <h3>Metas Realistas</h3>
-            <p>Establece objetivos de ahorro alcanzables y celebra cada logro.</p>
+            <h3>Realistic Goals</h3>
+            <p>Set achievable savings goals and celebrate each achievement.</p>
           </motion.div>
 
           <motion.div 
@@ -439,8 +439,8 @@ const BudgetPlanner: React.FC = () => {
             transition={{ type: "spring", stiffness: 300 }}
           >
             <Calendar size={32} />
-            <h3>Revisa Regularmente</h3>
-            <p>Monitorea tu presupuesto semanalmente para mantener el control.</p>
+            <h3>Review Regularly</h3>
+            <p>Monitor your budget weekly to maintain control.</p>
           </motion.div>
         </div>
       </motion.div>

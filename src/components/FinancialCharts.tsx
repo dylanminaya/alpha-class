@@ -33,22 +33,22 @@ interface CategoryData {
 }
 
 const FinancialCharts: React.FC = () => {
-  // Datos de ejemplo para los gráficos
+  // Sample data for charts
   const monthlyData: ChartData[] = [
-    { name: 'Ene', income: 3200, expenses: 1800, balance: 1400 },
+    { name: 'Jan', income: 3200, expenses: 1800, balance: 1400 },
     { name: 'Feb', income: 2800, expenses: 1600, balance: 1200 },
     { name: 'Mar', income: 3500, expenses: 2100, balance: 1400 },
-    { name: 'Abr', income: 4200, expenses: 1900, balance: 2300 },
+    { name: 'Apr', income: 4200, expenses: 1900, balance: 2300 },
     { name: 'May', income: 3800, expenses: 2200, balance: 1600 },
     { name: 'Jun', income: 4500, expenses: 2400, balance: 2100 },
   ];
 
   const categoryData: CategoryData[] = [
-    { name: 'Herramientas', value: 35, color: '#4f46e5' },
-    { name: 'Oficina', value: 25, color: '#10b981' },
+    { name: 'Tools', value: 35, color: '#4f46e5' },
+    { name: 'Office', value: 25, color: '#10b981' },
     { name: 'Marketing', value: 20, color: '#f59e0b' },
-    { name: 'Educación', value: 15, color: '#ef4444' },
-    { name: 'Otros', value: 5, color: '#8b5cf6' },
+    { name: 'Education', value: 15, color: '#ef4444' },
+    { name: 'Others', value: 5, color: '#8b5cf6' },
   ];
 
   const totalIncome = monthlyData.reduce((sum, item) => sum + item.income, 0);
@@ -63,11 +63,11 @@ const FinancialCharts: React.FC = () => {
       transition={{ duration: 0.6 }}
     >
       <div className="charts-header">
-        <h2>Análisis Financiero</h2>
-        <p>Visualiza tus finanzas con gráficos interactivos</p>
+        <h2>Financial Analysis</h2>
+        <p>Visualize your finances with interactive charts</p>
       </div>
 
-      {/* Resumen de Métricas */}
+      {/* Metrics Summary */}
       <motion.div 
         className="metrics-summary"
         initial={{ opacity: 0, scale: 0.9 }}
@@ -81,7 +81,7 @@ const FinancialCharts: React.FC = () => {
         >
           <TrendingUp size={24} />
           <div>
-            <span className="metric-label">Ingresos Totales</span>
+            <span className="metric-label">Total Income</span>
             <span className="metric-value">${totalIncome.toLocaleString()}</span>
           </div>
         </motion.div>
@@ -93,7 +93,7 @@ const FinancialCharts: React.FC = () => {
         >
           <TrendingDown size={24} />
           <div>
-            <span className="metric-label">Gastos Totales</span>
+            <span className="metric-label">Total Expenses</span>
             <span className="metric-value">${totalExpenses.toLocaleString()}</span>
           </div>
         </motion.div>
@@ -105,20 +105,20 @@ const FinancialCharts: React.FC = () => {
         >
           <DollarSign size={24} />
           <div>
-            <span className="metric-label">Balance Promedio</span>
+            <span className="metric-label">Average Balance</span>
             <span className="metric-value">${averageBalance.toLocaleString()}</span>
           </div>
         </motion.div>
       </motion.div>
 
-      {/* Gráfico de Barras - Ingresos vs Gastos */}
+      {/* Bar Chart - Income vs Expenses */}
       <motion.div 
         className="chart-container"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
       >
-        <h3>Ingresos vs Gastos Mensuales</h3>
+        <h3>Monthly Income vs Expenses</h3>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={monthlyData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -146,26 +146,26 @@ const FinancialCharts: React.FC = () => {
               dataKey="income" 
               fill="#10b981" 
               radius={[4, 4, 0, 0]}
-              name="Ingresos"
+              name="Income"
             />
             <Bar 
               dataKey="expenses" 
               fill="#ef4444" 
               radius={[4, 4, 0, 0]}
-              name="Gastos"
+              name="Expenses"
             />
           </BarChart>
         </ResponsiveContainer>
       </motion.div>
 
-      {/* Gráfico de Línea - Balance Mensual */}
+      {/* Line Chart - Monthly Balance */}
       <motion.div 
         className="chart-container"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
-        <h3>Balance Mensual</h3>
+        <h3>Monthly Balance</h3>
         <ResponsiveContainer width="100%" height={300}>
           <AreaChart data={monthlyData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -206,14 +206,14 @@ const FinancialCharts: React.FC = () => {
         </ResponsiveContainer>
       </motion.div>
 
-      {/* Gráfico de Torta - Distribución de Gastos por Categoría */}
+      {/* Pie Chart - Expense Distribution by Category */}
       <motion.div 
         className="chart-container pie-chart"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.5 }}
       >
-        <h3>Distribución de Gastos por Categoría</h3>
+        <h3>Expense Distribution by Category</h3>
         <div className="pie-chart-container">
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
@@ -264,14 +264,14 @@ const FinancialCharts: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* Gráfico de Línea - Tendencias */}
+      {/* Line Chart - Trends */}
       <motion.div 
         className="chart-container"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.6 }}
       >
-        <h3>Tendencia de Ingresos</h3>
+        <h3>Income Trend</h3>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={monthlyData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />

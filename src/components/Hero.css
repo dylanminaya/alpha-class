@@ -21,6 +21,49 @@
     radial-gradient(circle at 80% 20%, rgba(102, 187, 106, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 40% 40%, rgba(129, 199, 132, 0.05) 0%, transparent 50%);
   pointer-events: none;
+  animation: backgroundShift 20s ease-in-out infinite;
+}
+
+@keyframes backgroundShift {
+  0%, 100% { 
+    transform: scale(1) rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+  25% { 
+    transform: scale(1.1) rotate(1deg);
+    filter: hue-rotate(10deg);
+  }
+  50% { 
+    transform: scale(1.05) rotate(-1deg);
+    filter: hue-rotate(20deg);
+  }
+  75% { 
+    transform: scale(1.15) rotate(0.5deg);
+    filter: hue-rotate(15deg);
+  }
+}
+
+/* Partículas flotantes adicionales */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    radial-gradient(circle at 10% 50%, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 100px 100px, 150px 150px, 80px 80px, 120px 120px;
+  animation: particleFloat 30s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes particleFloat {
+  0% { transform: translateY(0px) translateX(0px); }
+  100% { transform: translateY(-100px) translateX(-50px); }
 }
 
 .hero-container {
@@ -37,9 +80,19 @@
 }
 
 .hero-content {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* Cambiar el orden para que el móvil esté a la derecha */
+.hero-text {
+  order: 1;
+}
+
+.hero-visual {
+  order: 2;
 }
 
 .hero-text {

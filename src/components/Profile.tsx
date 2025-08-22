@@ -27,14 +27,14 @@ interface UserProfile {
 
 const Profile: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile>({
-    name: 'Alex Rodríguez',
+    name: 'Alex Rodriguez',
     email: 'alex.rodriguez@email.com',
     phone: '+34 612 345 678',
-    location: 'Madrid, España',
+    location: 'Madrid, Spain',
     avatar: '👨‍💻',
     notifications: true,
     theme: 'light',
-    language: 'Español'
+    language: 'English'
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -43,7 +43,7 @@ const Profile: React.FC = () => {
   const handleSave = () => {
     setProfile(editedProfile);
     setIsEditing(false);
-    // Aquí se enviaría la información al backend
+    // Here the information would be sent to the backend
   };
 
   const handleCancel = () => {
@@ -71,19 +71,19 @@ const Profile: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Mi Perfil
+          My Profile
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          Gestiona tu información personal y preferencias
+          Manage your personal information and preferences
         </motion.p>
       </div>
 
       <div className="profile-content">
-        {/* Información Personal */}
+        {/* Personal Information */}
         <motion.div 
           className="profile-section"
           initial={{ opacity: 0, x: -20 }}
@@ -92,7 +92,7 @@ const Profile: React.FC = () => {
         >
           <div className="section-header">
             <User size={24} />
-            <h2>Información Personal</h2>
+            <h2>Personal Information</h2>
             {!isEditing && (
               <motion.button
                 className="edit-btn"
@@ -101,7 +101,7 @@ const Profile: React.FC = () => {
                 whileTap={{ scale: 0.95 }}
               >
                 <Edit3 size={16} />
-                Editar
+                Edit
               </motion.button>
             )}
           </div>
@@ -139,7 +139,7 @@ const Profile: React.FC = () => {
               <div className="info-item">
                 <Phone size={20} />
                 <div>
-                  <label>Teléfono</label>
+                  <label>Phone</label>
                   {isEditing ? (
                     <input
                       type="tel"
@@ -155,7 +155,7 @@ const Profile: React.FC = () => {
               <div className="info-item">
                 <MapPin size={20} />
                 <div>
-                  <label>Ubicación</label>
+                  <label>Location</label>
                   {isEditing ? (
                     <input
                       type="text"
@@ -178,17 +178,17 @@ const Profile: React.FC = () => {
               >
                 <button className="save-btn" onClick={handleSave}>
                   <Save size={16} />
-                  Guardar Cambios
+                  Save Changes
                 </button>
                 <button className="cancel-btn" onClick={handleCancel}>
-                  Cancelar
+                  Cancel
                 </button>
               </motion.div>
             )}
           </div>
         </motion.div>
 
-        {/* Configuraciones */}
+        {/* Settings */}
         <motion.div 
           className="profile-section"
           initial={{ opacity: 0, x: 20 }}
@@ -197,7 +197,7 @@ const Profile: React.FC = () => {
         >
           <div className="section-header">
             <Settings size={24} />
-            <h2>Configuraciones</h2>
+            <h2>Settings</h2>
           </div>
 
           <div className="settings-grid">
@@ -205,8 +205,8 @@ const Profile: React.FC = () => {
               <div className="setting-info">
                 <Bell size={20} />
                 <div>
-                  <h4>Notificaciones</h4>
-                  <p>Recibir alertas y recordatorios</p>
+                  <h4>Notifications</h4>
+                  <p>Receive alerts and reminders</p>
                 </div>
               </div>
               <label className="toggle">
@@ -223,16 +223,16 @@ const Profile: React.FC = () => {
               <div className="setting-info">
                 <Palette size={20} />
                 <div>
-                  <h4>Tema</h4>
-                  <p>Claro u oscuro</p>
+                  <h4>Theme</h4>
+                  <p>Light or dark</p>
                 </div>
               </div>
               <select
                 value={profile.theme}
                 onChange={(e) => handleInputChange('theme', e.target.value as 'light' | 'dark')}
               >
-                <option value="light">Claro</option>
-                <option value="dark">Oscuro</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
               </select>
             </div>
 
@@ -240,16 +240,16 @@ const Profile: React.FC = () => {
               <div className="setting-info">
                 <Shield size={20} />
                 <div>
-                  <h4>Privacidad</h4>
-                  <p>Configurar visibilidad del perfil</p>
+                  <h4>Privacy</h4>
+                  <p>Configure profile visibility</p>
                 </div>
               </div>
-              <button className="config-btn">Configurar</button>
+              <button className="config-btn">Configure</button>
             </div>
           </div>
         </motion.div>
 
-        {/* Estadísticas */}
+        {/* Statistics */}
         <motion.div 
           className="profile-section"
           initial={{ opacity: 0, y: 20 }}
@@ -257,7 +257,7 @@ const Profile: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.7 }}
         >
           <div className="section-header">
-            <h2>Estadísticas de Uso</h2>
+            <h2>Usage Statistics</h2>
           </div>
 
           <div className="stats-grid">
@@ -270,9 +270,9 @@ const Profile: React.FC = () => {
             >
               <div className="stat-icon">📊</div>
               <div className="stat-content">
-                <h3>Transacciones</h3>
+                <h3>Transactions</h3>
                 <span className="stat-number">47</span>
-                <span className="stat-label">Este mes</span>
+                <span className="stat-label">This month</span>
               </div>
             </motion.div>
 
@@ -285,9 +285,9 @@ const Profile: React.FC = () => {
             >
               <div className="stat-icon">💰</div>
               <div className="stat-content">
-                <h3>Balance Total</h3>
+                <h3>Total Balance</h3>
                 <span className="stat-number">€8,420</span>
-                <span className="stat-label">Disponible</span>
+                <span className="stat-label">Available</span>
               </div>
             </motion.div>
 
@@ -300,9 +300,9 @@ const Profile: React.FC = () => {
             >
               <div className="stat-icon">🎯</div>
               <div className="stat-content">
-                <h3>Metas</h3>
+                <h3>Goals</h3>
                 <span className="stat-number">3</span>
-                <span className="stat-label">Activas</span>
+                <span className="stat-label">Active</span>
               </div>
             </motion.div>
           </div>

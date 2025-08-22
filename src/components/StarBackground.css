@@ -1,0 +1,96 @@
+.star-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  color: #ffffff;
+  opacity: 0.6;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+}
+
+.bright-star {
+  color: #ffd700;
+  filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.8));
+  z-index: 1;
+}
+
+.shooting-star {
+  position: absolute;
+  color: #ffffff;
+  z-index: 2;
+}
+
+.shooting-star-trail {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffffff, transparent);
+  transform: translate(-50%, -50%) rotate(-45deg);
+  opacity: 0.8;
+}
+
+/* Estrellas con diferentes colores */
+.star:nth-child(3n) {
+  color: #87ceeb;
+  filter: drop-shadow(0 0 2px rgba(135, 206, 235, 0.8));
+}
+
+.star:nth-child(5n) {
+  color: #dda0dd;
+  filter: drop-shadow(0 0 2px rgba(221, 160, 221, 0.8));
+}
+
+.star:nth-child(7n) {
+  color: #98fb98;
+  filter: drop-shadow(0 0 2px rgba(152, 251, 152, 0.8));
+}
+
+/* Efectos de brillo adicionales */
+.star::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .star-background {
+    opacity: 0.7;
+  }
+  
+  .shooting-star-trail {
+    width: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .star-background {
+    opacity: 0.5;
+  }
+  
+  .shooting-star-trail {
+    width: 40px;
+  }
+}

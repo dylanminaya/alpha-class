@@ -59,7 +59,8 @@
 .navbar-cta {
   display: flex;
   gap: 1rem;
-  width: 100%;
+  margin-left: auto;
+  margin-right: 2rem;
 }
 
 .btn-login {
@@ -72,7 +73,11 @@
   font-weight: 600;
   transition: all 0.3s ease;
   font-family: 'Montserrat', sans-serif;
-  width: 100%;
+  min-width: 120px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-login:hover {
@@ -80,7 +85,6 @@
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-  width: 100%;
 }
 
 .btn-signup {
@@ -93,14 +97,17 @@
   font-weight: 600;
   transition: all 0.3s ease;
   font-family: 'Montserrat', sans-serif;
-  width: 100%;
+  min-width: 120px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-signup:hover {
   background: linear-gradient(135deg, #43a047, #4caf50);
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-  width: 100%;
 }
 
 /* Language Selector */
@@ -239,6 +246,20 @@
   height: 3px;
   background: #2e7d32;
   border-radius: 2px;
+}
+
+/* Settings Button in Navigation */
+.settings-nav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.settings-nav-btn:hover {
+  color: #2e7d32;
+  background: rgba(76, 175, 80, 0.1);
+  transform: translateY(-2px);
 }
 
 /* Hamburger Menu */

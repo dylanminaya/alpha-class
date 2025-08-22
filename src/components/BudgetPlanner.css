@@ -3,7 +3,8 @@
   width: 100%;
   margin: 0 auto;
   padding: 2rem 2rem;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  padding-top: 150px;
+  background: linear-gradient(135deg, #f8fdf8 0%, #e8f5e8 50%, #f0f9f0 100%);
   min-height: 100vh;
 }
 
@@ -447,6 +448,7 @@
 @media (max-width: 768px) {
   .budget-planner {
     padding: 1rem;
+    padding-top: 120px;
   }
   
   .budget-header h1 {
@@ -484,6 +486,10 @@
 }
 
 @media (max-width: 480px) {
+  .budget-planner {
+    padding-top: 100px;
+  }
+  
   .budget-header h1 {
     font-size: 2rem;
   }

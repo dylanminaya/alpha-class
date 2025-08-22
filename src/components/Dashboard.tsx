@@ -14,6 +14,9 @@ import {
   Star
 } from 'lucide-react';
 import './Dashboard.css';
+import ExpensesChart from './ExpensesChart';
+import NotificationSystem from './NotificationSystem';
+import ThemeToggle from './ThemeToggle';
 
 interface Transaction {
   id?: string;
@@ -84,11 +87,11 @@ const Dashboard: React.FC = () => {
   const exportToCSV = () => {
     setIsExporting(true);
     setTimeout(() => {
-      const headers = ['Tipo', 'Monto', 'Descripción', 'Categoría', 'Fecha'];
+      const headers = ['Type', 'Amount', 'Description', 'Category', 'Date'];
       const csvContent = [
         headers.join(','),
         ...transactions.map(t => [
-          t.type === 'income' ? 'Ingreso' : 'Gasto',
+          t.type === 'income' ? 'Income' : 'Expense',
           t.amount,
           `"${t.description}"`,
           t.category,
@@ -100,7 +103,7 @@ const Dashboard: React.FC = () => {
       const link = document.createElement('a');
       const url = URL.createObjectURL(blob);
       link.setAttribute('href', url);
-      link.setAttribute('download', `transacciones_${new Date().toISOString().split('T')[0]}.csv`);
+      link.setAttribute('download', `transactions_${new Date().toISOString().split('T')[0]}.csv`);
       link.style.visibility = 'hidden';
       document.body.appendChild(link);
       link.click();
@@ -116,23 +119,23 @@ const Dashboard: React.FC = () => {
         <html>
           <head>
             <meta charset="utf-8">
-            <title>Transacciones Financieras</title>
+            <title>Financial Transactions</title>
           </head>
           <body>
             <table border="1">
               <thead>
                 <tr>
-                  <th>Tipo</th>
-                  <th>Monto</th>
-                  <th>Descripción</th>
-                  <th>Categoría</th>
-                  <th>Fecha</th>
+                  <th>Type</th>
+                  <th>Amount</th>
+                  <th>Description</th>
+                  <th>Category</th>
+                  <th>Date</th>
                 </tr>
               </thead>
               <tbody>
                 ${transactions.map(t => `
                   <tr>
-                    <td>${t.type === 'income' ? 'Ingreso' : 'Gasto'}</td>
+                    <td>${t.type === 'income' ? 'Income' : 'Expense'}</td>
                     <td>${t.amount}</td>
                     <td>${t.description}</td>
                     <td>${t.category}</td>
@@ -149,7 +152,7 @@ const Dashboard: React.FC = () => {
       const link = document.createElement('a');
       const url = URL.createObjectURL(blob);
       link.setAttribute('href', url);
-      link.setAttribute('download', `transacciones_${new Date().toISOString().split('T')[0]}.xls`);
+      link.setAttribute('download', `transactions_${new Date().toISOString().split('T')[0]}.xls`);
       link.style.visibility = 'hidden';
       document.body.appendChild(link);
       link.click();
@@ -200,20 +203,28 @@ const Dashboard: React.FC = () => {
       </AnimatePresence>
 
       <div className="dashboard-header">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          Dashboard Financiero
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          Gestiona tus finanzas como freelancer
-        </motion.p>
+        <div className="header-content">
+          <div className="header-text">
+            <motion.h1
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              Financial Dashboard
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              Manage your finances as a freelancer
+            </motion.p>
+          </div>
+          <div className="header-controls">
+            <NotificationSystem />
+            <ThemeToggle />
+          </div>
+        </div>
       </div>
 
       {/* Balance Summary */}
@@ -232,7 +243,7 @@ const Dashboard: React.FC = () => {
             <Wallet size={32} />
           </motion.div>
           <div className="balance-info">
-            <h3>Balance Total</h3>
+            <h3>Total Balance</h3>
             <motion.span
               className="balance-amount"
               initial={{ scale: 0 }}
@@ -253,7 +264,7 @@ const Dashboard: React.FC = () => {
         >
           <TrendingUp size={24} />
           <div>
-            <span className="label">Ingresos</span>
+                         <span className="label">Income</span>
             <span className="amount">€{totalIncome.toFixed(2)}</span>
           </div>
         </motion.div>
@@ -267,7 +278,7 @@ const Dashboard: React.FC = () => {
         >
           <TrendingDown size={24} />
           <div>
-            <span className="label">Gastos</span>
+                         <span className="label">Expenses</span>
             <span className="amount">€{totalExpenses.toFixed(2)}</span>
           </div>
         </motion.div>
@@ -287,7 +298,7 @@ const Dashboard: React.FC = () => {
           whileTap={{ scale: 0.95 }}
         >
           <Zap size={18} />
-          {showAddForm ? 'Cancelar' : 'Agregar Transacción'}
+                     {showAddForm ? 'Cancel' : 'Add Transaction'}
         </motion.button>
 
         <div className="export-buttons">
@@ -299,7 +310,7 @@ const Dashboard: React.FC = () => {
             whileTap={{ scale: 0.95 }}
           >
             <FileText size={18} />
-            {isExporting ? 'Exportando...' : 'Exportar CSV'}
+                         {isExporting ? 'Exporting...' : 'Export CSV'}
           </motion.button>
 
           <motion.button
@@ -310,7 +321,7 @@ const Dashboard: React.FC = () => {
             whileTap={{ scale: 0.95 }}
           >
             <Download size={18} />
-            {isExporting ? 'Exportando...' : 'Exportar Excel'}
+                         {isExporting ? 'Exporting...' : 'Export Excel'}
           </motion.button>
         </div>
       </motion.div>
@@ -325,20 +336,20 @@ const Dashboard: React.FC = () => {
             exit={{ opacity: 0, height: 0, scale: 0.9 }}
             transition={{ duration: 0.3, type: "spring" }}
           >
-            <h3>Nueva Transacción</h3>
+                         <h3>New Transaction</h3>
             <div className="form-row">
               <div className="form-group">
-                <label>Tipo</label>
+                <label>Type</label>
                 <select
                   value={newTransaction.type}
                   onChange={(e) => setNewTransaction({...newTransaction, type: e.target.value as 'income' | 'expense'})}
                 >
-                  <option value="income">Ingreso</option>
-                  <option value="expense">Gasto</option>
+                                     <option value="income">Income</option>
+                   <option value="expense">Expense</option>
                 </select>
               </div>
               <div className="form-group">
-                <label>Monto</label>
+                <label>Amount</label>
                 <input
                   type="number"
                   placeholder="0.00"
@@ -349,34 +360,34 @@ const Dashboard: React.FC = () => {
             </div>
             <div className="form-row">
               <div className="form-group">
-                <label>Descripción</label>
+                <label>Description</label>
                 <input
                   type="text"
-                  placeholder="Descripción de la transacción"
+                  placeholder="Transaction description"
                   value={newTransaction.description}
                   onChange={(e) => setNewTransaction({...newTransaction, description: e.target.value})}
                 />
               </div>
               <div className="form-group">
-                <label>Categoría</label>
+                <label>Category</label>
                 <select
                   value={newTransaction.category}
                   onChange={(e) => setNewTransaction({...newTransaction, category: e.target.value})}
                 >
-                  <option value="">Seleccionar categoría</option>
-                  <option value="Trabajo">Trabajo</option>
+                                      <option value="">Select category</option>
+                  <option value="Work">Work</option>
                   <option value="Freelance">Freelance</option>
-                  <option value="Inversiones">Inversiones</option>
-                  <option value="Alimentación">Alimentación</option>
-                  <option value="Transporte">Transporte</option>
-                  <option value="Entretenimiento">Entretenimiento</option>
-                  <option value="Otros">Otros</option>
+                  <option value="Investments">Investments</option>
+                  <option value="Food">Food</option>
+                  <option value="Transport">Transport</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="Others">Others</option>
                 </select>
               </div>
             </div>
             <div className="form-row">
               <div className="form-group">
-                <label>Fecha</label>
+                <label>Date</label>
                 <input
                   type="date"
                   value={newTransaction.date}
@@ -386,7 +397,7 @@ const Dashboard: React.FC = () => {
               <div className="form-group">
                 <button className="submit-btn" onClick={handleAddTransaction}>
                   <Star size={16} />
-                  Agregar Transacción
+                  Add Transaction
                 </button>
               </div>
             </div>
@@ -401,7 +412,7 @@ const Dashboard: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
       >
-        <h2>Transacciones Recientes</h2>
+        <h2>Recent Transactions</h2>
         <div className="transactions-list">
           {transactions.length === 0 ? (
             <motion.div
@@ -411,8 +422,8 @@ const Dashboard: React.FC = () => {
               transition={{ delay: 1 }}
             >
               <BarChart3 size={48} />
-              <p>No hay transacciones aún</p>
-              <span>Agrega tu primera transacción para comenzar</span>
+              <p>No transactions yet</p>
+              <span>Add your first transaction to get started</span>
             </motion.div>
           ) : (
             transactions.map((transaction, index) => (
@@ -443,28 +454,26 @@ const Dashboard: React.FC = () => {
         </div>
       </motion.div>
 
+      {/* Expenses Chart by Category */}
+      <motion.div
+        className="chart-section"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.7 }}
+      >
+        <h2>Expense Analysis</h2>
+        <ExpensesChart transactions={transactions} />
+      </motion.div>
+
       {/* Planning Section */}
       <motion.div
         className="planning-section"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.7 }}
+        transition={{ duration: 0.8, delay: 0.8 }}
       >
-        <h2>Planificación Financiera</h2>
+        <h2>Financial Planning</h2>
         <div className="planning-cards">
-          <motion.div
-            className="planning-card"
-            whileHover={{ scale: 1.05, y: -5 }}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-          >
-            <BarChart3 size={32} />
-            <h3>Análisis de Gastos</h3>
-            <p>Revisa tus patrones de gastos y encuentra oportunidades de ahorro</p>
-            <button className="planning-btn">Ver Análisis</button>
-          </motion.div>
-
           <motion.div
             className="planning-card"
             whileHover={{ scale: 1.05, y: -5 }}
@@ -472,10 +481,10 @@ const Dashboard: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.9 }}
           >
-            <Target size={32} />
-            <h3>Metas Financieras</h3>
-            <p>Establece y rastrea tus objetivos financieros a corto y largo plazo</p>
-            <button className="planning-btn">Gestionar Metas</button>
+            <BarChart3 size={32} />
+            <h3>Expense Analysis</h3>
+            <p>Review your spending patterns and find savings opportunities</p>
+            <button className="planning-btn">View Analysis</button>
           </motion.div>
 
           <motion.div
@@ -485,10 +494,23 @@ const Dashboard: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 1.0 }}
           >
+            <Target size={32} />
+            <h3>Financial Goals</h3>
+            <p>Set and track your short and long-term financial objectives</p>
+            <button className="planning-btn">Manage Goals</button>
+          </motion.div>
+
+          <motion.div
+            className="planning-card"
+            whileHover={{ scale: 1.05, y: -5 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 1.1 }}
+          >
             <Calendar size={32} />
-            <h3>Presupuesto Mensual</h3>
-            <p>Crea y mantén un presupuesto mensual para controlar tus finanzas</p>
-            <button className="planning-btn">Crear Presupuesto</button>
+            <h3>Monthly Budget</h3>
+            <p>Create and maintain a monthly budget to control your finances</p>
+            <button className="planning-btn">Create Budget</button>
           </motion.div>
         </div>
       </motion.div>

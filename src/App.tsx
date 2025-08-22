@@ -9,6 +9,8 @@ import BudgetPlanner from './components/BudgetPlanner'
 import Profile from './components/Profile'
 import Login from './pages/Auth/Login/Login'
 import Signup from './pages/Auth/Signup/Signup'
+import StarBackground from './components/StarBackground'
+import { ThemeProvider } from './contexts/ThemeContext'
 import './App.css'
 
 // Home page component
@@ -78,15 +80,18 @@ function ProfilePage() {
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/dashboard" element={<DashboardPage />} />
-      <Route path="/charts" element={<ChartsPage />} />
-      <Route path="/budget" element={<BudgetPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-    </Routes>
+    <ThemeProvider>
+      <StarBackground />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/charts" element={<ChartsPage />} />
+        <Route path="/budget" element={<BudgetPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+    </ThemeProvider>
   )
 }
 
